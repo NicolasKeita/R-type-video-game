@@ -1,7 +1,6 @@
 language: cpp
 
 os:
-  - windows
   - linux
 
 compiler:
