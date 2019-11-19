@@ -6,4 +6,6 @@ find_package(Boost 1.69.0 REQUIRED)
 
 include_directories(./)
 
-add_library(my_network STATIC ServerWrapper.cpp)
+add_library(my_network STATIC
+        ServerWrapper.cpp
+        ClientWrapper.cpp)

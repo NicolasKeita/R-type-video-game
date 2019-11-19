@@ -60,7 +60,7 @@ void uti::network::ServerWrapper::_startAccept()
 }
 
 void uti::network::ServerWrapper::_handleAccept(const boost::shared_ptr<uti::network::ServerWrapper::TcpConnection> &new_connection,
-                                                  const boost::system::error_code &error)
+                                                const boost::system::error_code &error)
 {
     if (!error) {
         new_connection->start();

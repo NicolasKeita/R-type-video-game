@@ -20,7 +20,7 @@ namespace uti::network {
              * return an empty string to not reply to the server.
              * The function is ran asynchronously.
              */
-            virtual void connectToHost(const std::string &serverAddress,
+            virtual std::string connectToHost(const std::string &serverAddress,
                                  unsigned int port,
                                  std::string (*handleMessageReceived)(const std::string &)) = 0;
             virtual void sendMessage(std::string message) = 0;
