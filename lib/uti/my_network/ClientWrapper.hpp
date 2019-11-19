@@ -10,22 +10,30 @@
 
 #include <boost/array.hpp>
 #include <boost/asio.hpp>
+#include <string>
 #include "IClientWrapper.hpp"
 
 namespace uti::network {
     class ClientWrapper : public IClientWrapper {
         public:
             ClientWrapper();
-            std::string connectToHost(const std::string &serverAddress,
-                                      unsigned int port,
-                                      std::string (*handleMessageReceived)(const std::string &)) override;
-            void sendMessage(std::string message) override;
+            void connectToHost(const std::string &serverAddress,
+                               unsigned int port,
+                               std::string (*handleMessageReceived)(const std::string &)) override;
+            void sendMessage(const std::string &message) override;
 
         private:
+            void _handleRead(const boost::system::error_code & e,
+                             std::size_t bytesTransferred);
+
+        public:
             boost::asio::io_context                       _io_context;
+        private:
             boost::asio::ip::tcp::resolver *              _resolver;
             boost::asio::ip::tcp::resolver::results_type  _endpoints;
             boost::asio::ip::tcp::socket *                _socket;
+            boost::array<char, 128>                       _buf;
+            std::string (*_handleMessageReceived)(const std::string &);
     };
 }
 

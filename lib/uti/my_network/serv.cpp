@@ -10,6 +10,10 @@
 
 std::string handleMessageReceived(const std::string &messageReceived)
 {
+    std::cerr << "[Message received] : " << messageReceived << std::endl;
+    if (messageReceived == "Salut") {
+        return "les";
+    }
 	return "";
 }
 

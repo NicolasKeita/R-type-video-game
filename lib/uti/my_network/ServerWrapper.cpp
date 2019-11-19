@@ -93,7 +93,7 @@ void uti::network::ServerWrapper::TcpConnection::handleRead(const boost::system:
         return;
     }
     std::string messageReceived(_buffer.begin(), _buffer.end());
-    int i = 0;
+    std::size_t i = 0;
     for (; i < messageReceived.size(); ++i) {
         if (messageReceived[i] == '\0') {
             break;
@@ -104,7 +104,7 @@ void uti::network::ServerWrapper::TcpConnection::handleRead(const boost::system:
         messageReceived.pop_back();
     }
     std::string reply = _handleMessageReceived(messageReceived);
-    if (reply != "") {
+    if (!reply.empty()) {
         if (reply.back() != '\n')
             reply += '\n';
         sendMessage(reply);
@@ -118,6 +118,7 @@ void uti::network::ServerWrapper::TcpConnection::handleRead(const boost::system:
 
 void uti::network::ServerWrapper::TcpConnection::handleWrite()
 {
+    std::cout << "Je viens d'envoyer !" << std::endl;
     // stuff to do after sending a message
 }
 
