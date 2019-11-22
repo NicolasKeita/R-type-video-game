@@ -13,7 +13,6 @@ before_install:
   - PY_CMD=python3
   - $PY_CMD -m pip install --user --upgrade conan
   - conan user
-  - sudo apt-get -y install g++
 
 before_script:
   - mkdir -p ./build/
@@ -26,3 +25,11 @@ script:
 
 after_script:
   - cp bin/R_type_video_game ../
+  - cd ../
+  #Starting test libmy_network
+  - sudo apt-get -y install libboost-all-dev
+  - cp lib/uti/my_network/
+  - mkdir -p ./build.
+  - cd ./build/
+  - cmake ../
+  - make test

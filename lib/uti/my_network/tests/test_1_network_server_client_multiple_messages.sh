@@ -1,6 +1,10 @@
 #!/bin/sh
 
+if [ -z "$1" ] ; then
+cd "test_1_source_code/" || exit 42
+else
 cd "$1/test_1_source_code/" || exit 42
+fi
 g++ serv.cpp ../../ServerWrapper.cpp -l pthread  -o serv -I ../../
 g++ client.cpp ../../ClientWrapper.cpp -l pthread -I ../../../my_string/ -I ../../ -o client
 ./serv > /dev/null 2>&1 &
