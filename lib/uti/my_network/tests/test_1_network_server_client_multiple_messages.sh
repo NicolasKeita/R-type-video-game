@@ -9,9 +9,9 @@ g++ serv.cpp ../../ServerWrapper.cpp -l pthread  -o serv -I ../../
 g++ client.cpp ../../ClientWrapper.cpp -l pthread -I ../../../my_string/ -I ../../ -o client
 ./serv > /dev/null 2>&1 &
 ./client >> ../log_client.txt 2>&1 &
-sleep 4
-ps -ef | grep -w ./serv | grep -v grep | awk '{print $2}' | xargs kill
-ps -ef | grep -w ./client | grep -v grep | awk '{print $2}' | xargs kill
+#sleep 4
+#ps -ef | grep -w ./serv | grep -v grep | awk '{print $2}' | xargs kill
+#ps -ef | grep -w ./client | grep -v grep | awk '{print $2}' | xargs kill
 FIRST_TIME_RESULT=$(grep "FIRST TEST SUCCESSFULLY COMPLETED" ../log_client.txt)
 SECOND_TIME_RESULT=$(grep "SECOND TEST" ../log_client.txt)
 rm ../log_client.txt
