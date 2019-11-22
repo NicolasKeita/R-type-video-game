@@ -28,9 +28,9 @@ after_script:
   - cd ../
   #Starting test libmy_network
   - sudo apt-get -y install libboost1.69-dev
-  - cp lib/uti/my_network/
+  - cd lib/uti/my_network/
   - mkdir -p ./build.
   - cd ./build/
   - cmake ../
-  - cd ../../../../build
+#  - cd ../../../../../build
   - make test
