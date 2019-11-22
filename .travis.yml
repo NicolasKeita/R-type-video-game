@@ -6,10 +6,5 @@ os:
 compiler:
   - gcc
 
-before_script:
-  - mkdir -p build
-  - cd build
-  - cmake ../
-
 script:
-  - make
+  - ./build.sh

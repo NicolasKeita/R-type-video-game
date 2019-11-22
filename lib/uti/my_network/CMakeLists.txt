@@ -5,13 +5,13 @@ set(CMAKE_CXX_STANDARD 17)
 
 find_package(Boost 1.69.0 REQUIRED)
 
-include_directories(
-        ./
-        ./../my_string/)
-
 add_library(my_network STATIC
         ServerWrapper.cpp
         ClientWrapper.cpp)
+
+target_include_directories(my_network PUBLIC
+        ${CMAKE_CURRENT_SOURCE_DIR}
+        ./../my_string/)
 
 enable_testing()
 add_test(test_network_1
