@@ -42,3 +42,4 @@ Makefile
 R_type_video_game
 serv
 client
+*.swp

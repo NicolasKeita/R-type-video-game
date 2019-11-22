@@ -1,4 +1,8 @@
 #!/bin/sh
 
-cmake -S . -B build
-cmake --build build && cp build/R_type_video_game ./
+mkdir -p ./build/
+cd ./build/
+conan install ../ --build=missing
+cmake ../
+cmake --build ./ && cp bin/R_type_video_game ../
+cd ../
