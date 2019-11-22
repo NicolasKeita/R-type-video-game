@@ -6,5 +6,11 @@ os:
 compiler:
   - gcc
 
+before_script:
+  - cmake -S . -B build
+
 script:
-  - ./build.sh
+  - cmake --build build
+
+after_script:
+  - cp build/R_type_video_game ./
