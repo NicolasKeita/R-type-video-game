@@ -7,7 +7,7 @@ compiler:
   - gcc
 
 before_install:
-  - sudo pip3 install conan
+  - sudo pip install conan
   - conan user
 
 before_script:
