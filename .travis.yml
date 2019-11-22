@@ -27,8 +27,9 @@ after_script:
   - cp bin/R_type_video_game ../
   - cd ../
   #Starting test libmy_network
-  #- sudo apt-get update -qq
-  #- sudo apt-get -y install libboost-dev
+  - sudo add-apt-repository -y ppa:lyx-devel/release
+  - sudo apt-get update -qq
+  - sudo apt-get -y install libboost-dev
   #- cd lib/uti/my_network/
   #- mkdir -p ./build/
   #- cd ./build/
