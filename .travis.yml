@@ -28,7 +28,7 @@ after_script:
   - cd ../
   #Starting test libmy_network
   #- sudo apt-get -y install libboost1.69-dev
-  - sudo apt-get -y libboost-all-dev
+  - sudo apt-get -y install libboost-all-dev
   - cd lib/uti/my_network/
   - mkdir -p ./build/
   - cd ./build/
