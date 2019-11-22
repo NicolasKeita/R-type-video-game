@@ -18,7 +18,7 @@ before_script:
   - cmake ../
 
 script:
-  - cmake --build build
+  - cmake --build ./
 
 after_script:
-  - cp build/R_type_video_game ./
+  - cp bin/R_type_video_game ../
