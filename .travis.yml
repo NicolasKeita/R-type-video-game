@@ -1,4 +1,3 @@
-language: cpp
 
 os: linux
 language: python
@@ -9,7 +8,7 @@ compiler:
   - gcc
 
 before_install:
-  - pip install --user conan
+  - pip install conan
   - conan user
 
 before_script:
