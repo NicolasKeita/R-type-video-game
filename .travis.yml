@@ -9,7 +9,7 @@ compiler:
   - gcc
 
 before_install:
-  - sudo pip install conan
+  - pip install --user conan
   - conan user
 
 before_script:
