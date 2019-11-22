@@ -1,13 +1,15 @@
 
 os: linux
 language: cpp
-python: "3.7"
 dist: xenial
 
 compiler:
   - gcc
 
+name: Style, docs, and pip
+cache: false
 before_install:
+  - pyenv global $(pyenv whence 2to3)
   - PY_CMD=python3
   - $PY_CMD -m pip install --user --upgrade conan
   - conan user
