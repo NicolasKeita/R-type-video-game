@@ -1,7 +1,6 @@
 
 os: linux
 language: cpp
-dist: xenial
 
 compiler:
   - gcc
