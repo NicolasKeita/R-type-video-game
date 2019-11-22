@@ -6,9 +6,14 @@ os:
 compiler:
   - gcc
 
+before_install:
+  - pip install conan
+  - conan user
+
 before_script:
   - mkdir -p ./build/
   - cd ./build/
+  - conan install ../ --build=missing
   - cmake ../
 
 script:
