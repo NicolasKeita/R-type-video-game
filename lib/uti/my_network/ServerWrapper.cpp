@@ -6,7 +6,6 @@
 */
 
 #include <string>
-#include <cstdlib>
 #include <boost/smart_ptr/make_shared.hpp>
 #include <utility>
 #include "ServerWrapper.hpp"
@@ -15,9 +14,7 @@ uti::network::ServerWrapper::ServerWrapper()
         : _welcomeMessage { "" },
           _handleMessageReceived { nullptr },
           _acceptor { nullptr }
-{
-
-}
+{}
 
 void uti::network::ServerWrapper::turnOn(unsigned int port,
                                          std::string (*handleMessageReceived)(const std::string &),
@@ -32,20 +29,6 @@ void uti::network::ServerWrapper::turnOn(unsigned int port,
     _io_context.run();
 }
 
-/*
-uti::network::ServerWrapper::ServerWrapper(unsigned int port,
-                                             std::string (*handleMessageReceived)(const std::string &),
-                                             const std::string &welcomeMessage)
-        : _welcomeMessage { welcomeMessage },
-          _handleMessageReceived { handleMessageReceived },
-          _acceptor { _io_context, tcp::endpoint(tcp::v4(), port) }
-{
-    if (_welcomeMessage.back() != '\n')
-        _welcomeMessage += '\n';
-            _startAccept();
-    _io_context.run();
-}*/
-
 void uti::network::ServerWrapper::_startAccept()
 {
     auto newConnection =
@@ -53,10 +36,10 @@ void uti::network::ServerWrapper::_startAccept()
                                                                                       _welcomeMessage,
                                                                                       _handleMessageReceived);
     _acceptor->async_accept(newConnection->socket(),
-                           boost::bind(&ServerWrapper::_handleAccept,
-                                       this,
-                                       newConnection,
-                                       boost::asio::placeholders::error));
+                            boost::bind(&ServerWrapper::_handleAccept,
+                                        this,
+                                        newConnection,
+                                        boost::asio::placeholders::error));
 }
 
 void uti::network::ServerWrapper::_handleAccept(const boost::shared_ptr<uti::network::ServerWrapper::TcpConnection> &new_connection,
@@ -100,7 +83,7 @@ void uti::network::ServerWrapper::TcpConnection::handleRead(const boost::system:
         }
     }
     messageReceived = std::string(messageReceived.begin(), messageReceived.begin() + i);
-    if (messageReceived.back() == '\n') {
+    while (messageReceived.back() == '\n') {
         messageReceived.pop_back();
     }
     std::string reply = _handleMessageReceived(messageReceived);
@@ -118,7 +101,7 @@ void uti::network::ServerWrapper::TcpConnection::handleRead(const boost::system:
 
 void uti::network::ServerWrapper::TcpConnection::handleWrite()
 {
-    std::cout << "Je viens d'envoyer !" << std::endl;
+    //std::cout << "Je viens d'envoyer !" << std::endl;
     // stuff to do after sending a message
 }
 

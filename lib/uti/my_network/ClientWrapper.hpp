@@ -10,13 +10,16 @@
 
 #include <boost/array.hpp>
 #include <boost/asio.hpp>
+#include <deque>
 #include <string>
+#include <memory>
 #include "IClientWrapper.hpp"
 
 namespace uti::network {
     class ClientWrapper : public IClientWrapper {
         public:
             ClientWrapper();
+            ~ClientWrapper();
             void connectToHost(const std::string &serverAddress,
                                unsigned int port,
                                std::string (*handleMessageReceived)(const std::string &)) override;
@@ -25,14 +28,18 @@ namespace uti::network {
         private:
             void _handleRead(const boost::system::error_code & e,
                              std::size_t bytesTransferred);
+            void _do_write();
 
         public:
-            boost::asio::io_context                       _io_context;
+            boost::asio::io_context                         _io_context;
         private:
-            boost::asio::ip::tcp::resolver *              _resolver;
-            boost::asio::ip::tcp::resolver::results_type  _endpoints;
-            boost::asio::ip::tcp::socket *                _socket;
-            boost::array<char, 128>                       _buf;
+            std::unique_ptr<boost::asio::ip::tcp::resolver> _resolver;
+            boost::asio::ip::tcp::resolver::results_type    _endpoints;
+            std::unique_ptr<boost::asio::ip::tcp::socket>   _socket;
+            boost::array<char, 128>                         _buf;
+            std::deque<std::string>                         _messagesToSend;
+            std::unique_ptr<std::thread>                     _t;
+            bool                                            _connected;
             std::string (*_handleMessageReceived)(const std::string &);
     };
 }

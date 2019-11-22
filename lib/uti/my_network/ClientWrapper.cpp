@@ -7,62 +7,68 @@
 
 #include <iostream>
 #include <string>
+#include <deque>
+#include <memory>
 #include <boost/bind.hpp>
-#include <boost/enable_shared_from_this.hpp>
-#include <boost/shared_ptr.hpp>
-#include <boost/enable_shared_from_this.hpp>
 #include <boost/asio.hpp>
-#include <boost/array.hpp>
-#include <boost/noncopyable.hpp>
 #include <boost/asio/buffer.hpp>
-#include <boost/format.hpp>
-#include <thread>
 #include "ClientWrapper.hpp"
+#include "MyStrTok.hpp"
 
 uti::network::ClientWrapper::ClientWrapper()
-        : _resolver { nullptr }, _socket { nullptr }, _buf {}, _handleMessageReceived { nullptr }
+        : _buf {},
+          _handleMessageReceived { nullptr },
+          _connected { false }
 {}
+
+uti::network::ClientWrapper::~ClientWrapper()
+{
+    _t->join();
+}
 
 void uti::network::ClientWrapper::connectToHost(const std::string &serverAddress,
                                                 unsigned int port,
                                                 std::string (*handleMessageReceived)(const std::string &))
 {
-    _resolver = new boost::asio::ip::tcp::resolver(_io_context);
+    _resolver = std::make_unique<boost::asio::ip::tcp::resolver>(_io_context);
     _endpoints = _resolver->resolve(serverAddress, std::to_string(port));
-    _socket = new boost::asio::ip::tcp::socket(_io_context);
+    _socket = std::make_unique<boost::asio::ip::tcp::socket>(_io_context);
+    _handleMessageReceived = handleMessageReceived;
     boost::asio::connect(*_socket, _endpoints);
+    _t = std::make_unique<std::thread>([&](){ _io_context.run();});
     _socket->async_read_some(boost::asio::buffer(_buf),
-                             boost::bind(&ClientWrapper::_handleRead, this,
+                             boost::bind(&ClientWrapper::_handleRead,
+                                         this,
                                          boost::asio::placeholders::error,
                                          boost::asio::placeholders::bytes_transferred));
-            // Faire une fonction private read()
-    /*
-    size_t len = _socket->read_some(boost::asio::buffer(buf), error);
-    if (error == boost::asio::error::eof)
-        return ""; // Connection closed cleanly by peer.
-    if (error)
-        throw boost::system::system_error(error);
-    std::string welcomeMessage;
-    std::copy(buf.begin(), buf.begin()+ len, std::back_inserter(welcomeMessage));
-    return welcomeMessage;*/
+    _connected = true;
 }
 
-void uti::network::ClientWrapper::sendMessage(const std::string &message)
+void uti::network::ClientWrapper::sendMessage(const std::string &message_origin)
 {
-    boost::asio::async_write(*_socket,
-                             boost::asio::buffer(message),
-                             [this](boost::system::error_code ec, std::size_t)
-                             {
-                                 if (ec)
-                                     _socket->close();
-                             }
-    );
+    if (!_connected)
+        return;
+    std::string message = message_origin;
+    if (!message.empty()) {
+        if (message.back() != '\n')
+            message += '\n';
+        bool write_in_progress = !_messagesToSend.empty();
+        _messagesToSend.push_back(message);
+        if (!write_in_progress) {
+            _do_write();
+        }
+    }
+}
+
+void uti::network::ClientWrapper::_do_write()
+{
+    _socket->write_some(boost::asio::buffer(_messagesToSend.front()));
+    _messagesToSend.pop_front();
 }
 
 void uti::network::ClientWrapper::_handleRead(const boost::system::error_code & error,
                                               std::size_t bytesTransferred)
 {
-    std::cerr << "[DEBUG] handleRead called" << std::endl;
     if (error == boost::asio::error::eof) {
         std::cerr << "[DEBUG] Connection closed" << std::endl;
         _socket->close();
@@ -72,5 +78,19 @@ void uti::network::ClientWrapper::_handleRead(const boost::system::error_code & 
         throw boost::system::system_error(error);
     std::string messageReceived;
     std::copy(_buf.begin(), _buf.begin()+ bytesTransferred, std::back_inserter(messageReceived));
-    std::cerr << "[DEBUG] Message received :" << messageReceived << "FIN" << std::endl;
+    std::vector<std::string> messages;
+    uti::myStrTok(messageReceived, messages, "\n");
+    for (const std::string &msg : messages) {
+        std::string reply = _handleMessageReceived(msg);
+        if (!reply.empty()) {
+            if (reply.back() != '\n')
+                reply += '\n';
+            sendMessage(reply);
+        }
+    }
+    _socket->async_read_some(boost::asio::buffer(_buf),
+                             boost::bind(&ClientWrapper::_handleRead,
+                                         this,
+                                         boost::asio::placeholders::error,
+                                         boost::asio::placeholders::bytes_transferred));
 }

@@ -10,16 +10,22 @@
 
 std::string handleMessageReceived(const std::string &messageReceived)
 {
-    std::cerr << "[Message received] : " << messageReceived << std::endl;
-    if (messageReceived == "Salut") {
-        return "les";
-    }
+    std::cerr << "[Message received] : " << messageReceived << "FIN" << std::endl;
+    if (messageReceived == "AB")
+        return "CD";
+    if (messageReceived == "EF")
+        return "GH";
+    if (messageReceived == "IJ")
+        return "FIRST TEST SUCCESSFULLY COMPLETED !";
+    if (messageReceived == "too")
+        return "fast";
+    if (messageReceived == "for you")
+        return "SECOND TEST SUCCESFULLY COMPLETED !";
 	return "";
 }
 
 int main()
 {
-    std::cerr << "[DEBUG] begin" << std::endl;
     try
     {
         // Blocking

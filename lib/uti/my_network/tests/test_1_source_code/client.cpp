@@ -6,6 +6,13 @@
 
 std::string handleMessageReceived(const std::string &messageReceived)
 {
+    std::cerr << "[DEBUG] Message received:" << messageReceived << "FIN" << std::endl;
+    if (messageReceived == "CD")
+        return "EF";
+    if (messageReceived == "GH")
+        return "IJ";
+    if (messageReceived == "fast")
+        return "for you";
     return "";
 }
 
@@ -14,14 +21,17 @@ int main()
     uti::network::ClientWrapper client;
     try {
         client.connectToHost("0.0.0.0", 42424, &handleMessageReceived);
-        client.sendMessage("Salut");
+        client.sendMessage("AB");
         std::cerr << "[DEBUG] Debut de la loop" << std::endl;
+        bool did = false;
 
         while (true) {
-            usleep(100000);
-            std::thread t([&](){ client._io_context.run(); });
+            usleep(200000);
+            if (!did) {
+                client.sendMessage("too");
+                did = true;
+            }
             std::cerr << "[DEBUG] One loop done" << std::endl;
-            t.join();
         }
     }
     catch (std::exception &e) {
