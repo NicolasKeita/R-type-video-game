@@ -12,3 +12,8 @@ include_directories(
 add_library(my_network STATIC
         ServerWrapper.cpp
         ClientWrapper.cpp)
+
+enable_testing()
+add_test(test_network_1
+        ${CMAKE_HOME_DIRECTORY}/tests/test_1_network_server_client_multiple_messages.sh
+        ${CMAKE_HOME_DIRECTORY}/tests)
