@@ -1,6 +1,6 @@
 
 os: linux
-language: python
+language: cpp
 python: "3.7"
 dist: xenial
 
@@ -8,10 +8,9 @@ compiler:
   - gcc
 
 before_install:
-  - pip install conan
+  - PY_CMD=python3
+  - $PY_CMD -m pip install --user --upgrade conan
   - conan user
-
-langague: cpp
 
 before_script:
   - mkdir -p ./build/
