@@ -7,7 +7,9 @@ compiler:
   - gcc
 
 before_script:
-  - cmake -S . -B build
+  - mkdir -p ./build/
+  - cd ./build/
+  - cmake ../
 
 script:
   - cmake --build build
