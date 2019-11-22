@@ -27,9 +27,10 @@ after_script:
   - cp bin/R_type_video_game ../
   - cd ../
   #Starting test libmy_network
-  - sudo apt-get -y install libboost-all-dev
+  - sudo apt-get -y install libboost1.69-dev
   - cp lib/uti/my_network/
   - mkdir -p ./build.
   - cd ./build/
   - cmake ../
+  - cd ../../../../build
   - make test
