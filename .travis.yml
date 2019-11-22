@@ -11,6 +11,8 @@ before_install:
   - pip install conan
   - conan user
 
+langague: cpp
+
 before_script:
   - mkdir -p ./build/
   - cd ./build/
