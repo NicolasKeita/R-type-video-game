@@ -21,7 +21,7 @@ target_link_libraries(test_client
         ${CMAKE_THREAD_LIBS_INIT}
         my_network)
 
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/tests/test_10_msgs.sh test_10_msgs.sh COPYONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/test_10_msgs.sh test_10_msgs.sh COPYONLY)
 add_test(test_network_0
         ${CMAKE_COMMAND} --build ./)
 add_test(test_network_1
