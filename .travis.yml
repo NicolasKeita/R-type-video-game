@@ -18,7 +18,7 @@ before_script:
   - mkdir -p ./build/
   - cd ./build/
   - conan install ../ --build=missing -g virtualenv
-  - ./activate.sh
+  - sh ./activate.sh
   - cmake ../
 
 script:
