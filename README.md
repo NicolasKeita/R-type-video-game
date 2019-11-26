@@ -1,7 +1,7 @@
 # R-Type
 R-Type is a C++ Program created for an Epitech project that takes rules from the original game R-Type
 
-R-Type is a basic "shot them up" 2D video game.
+R-Type is a basic "shoot them up" 2D video game.
 
 [![Build Status](https://travis-ci.com/NicolasKeita/R-type-video-game.svg?token=yCU9eZUj8esevSHWuiuJ&branch=master)](https://travis-ci.com/NicolasKeita/R-type-video-game)
 
