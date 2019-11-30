@@ -8,7 +8,8 @@ set(CMAKE_CXX_STANDARD 17)
 
 add_executable(R_type_video_game
   srcs/main.cpp
-  srcs/background.cpp)
+  srcs/background.cpp
+  srcs/Graphic.cpp)
 
 set (CMAKE_CXX_FLAGS "-lsfml-graphics -lsfml-window -lsfml-system")
 
