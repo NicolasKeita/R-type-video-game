@@ -7,9 +7,7 @@ R-Type is a basic "shoot them up" 2D video game.
 
 ## Prerequisites
 
-SFML
-
-Boost.asio
+None (standalone)
 
 ## Installation
 
