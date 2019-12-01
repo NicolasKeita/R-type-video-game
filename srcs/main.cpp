@@ -5,7 +5,6 @@
 **
 */
 
-#include <iostream>
 #include "background.hpp"
 
 int main(int argc, char **argv, char **env)

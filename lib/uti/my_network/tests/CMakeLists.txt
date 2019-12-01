@@ -10,10 +10,8 @@ include_directories(
         ./
         ../)
 
-#message(${CMAKE_COMMAND} " " --build " "${CMAKE_BINARY_DIR} " " --target " "${CMAKE_HOME_DIRECTORY}/tests/test_1_source_code/serv.cpp)
 add_executable(test_serv test_1_source_code/serv.cpp)
 add_executable(test_client test_1_source_code/client.cpp)
-#target_link_directories(test_serv PUBLIC ../build)
 target_link_libraries(test_serv
         ${CMAKE_THREAD_LIBS_INIT}
         my_network)
