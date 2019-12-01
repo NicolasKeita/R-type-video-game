@@ -13,9 +13,9 @@ Conan (to install Boost.asio)
 
 Linux :
 
-``` bash build.bash```
+``` $ bash build.bash```
  
- ```./R_type_video_game```
+ ```$ ./R_type_video_game```
  
 
 Windows :
@@ -27,8 +27,8 @@ Windows :
 
 ```bash
 start server:
-./r-type_server
+$ ./r-type_server
 
 start client;
-./r-type_client
+$ ./r-type_client
 ```
