@@ -6,19 +6,30 @@ conan_basic_setup()
 
 set(CMAKE_CXX_STANDARD 17)
 
-find_package(SFML 2.5.1 EXACT COMPONENTS graphics window system REQUIRED)
 add_executable(R_type_video_game
-  srcs/main.cpp
-  srcs/background.cpp
-  srcs/Graphic.cpp)
+        srcs/main.cpp
+        srcs/background.cpp
+        srcs/Graphic.cpp)
+
+if (MSVC)
+    set(SFML_LIB_DIR "lib/SFML-2.5.1/windows")
+else(MSCV)
+    set(SFML_LIB_DIR "lib/SFML-2.5.1/linux")
+endif(MSVC)
 
 target_include_directories(R_type_video_game PUBLIC
-  ./srcs
-  lib/uti/my_network)
+        ./srcs
+        lib/uti/my_network
+        ${SFML_LIB_DIR}/include)
 
 add_subdirectory("lib/uti/my_network")
-set(SFML_BUILD_AUDIO FALSE)
+if (NOT MSVC)
+    target_link_directories(R_type_video_game PRIVATE
+            ${SFML_LIB_DIR}/lib)
+endif()
 target_link_libraries(R_type_video_game PRIVATE
         my_network
         sfml-graphics
+        sfml-window
+        sfml-system
         ${CONAN_LIBS})
