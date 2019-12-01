@@ -35,7 +35,7 @@ install:
 before_script:
   - mkdir -p ./build/
   - cd ./build/
-  - conan install ../ --build=missing -g virtualenv
+  - conan install ../ --build=missing -s compiler.libcxx=libstdc++11 -g virtualenv
   - source activate.sh
   - cmake ../
 
