@@ -3,6 +3,7 @@
 
 # R-Type
 R-Type is a "shoot them up" 2D video game.
+
 Our video game has been created with the SFML library.
 
 ## Prerequisites
