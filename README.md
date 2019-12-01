@@ -9,7 +9,7 @@ Our video game has been created with the SFML library.
 
 Conan (to install Boost.asio)
 
-## Installation
+## Usage
 
 Linux :
 
@@ -21,14 +21,3 @@ Linux :
 Windows :
 
 ``` ask my team ```
-
-
-## Usage
-
-```bash
-start server:
-$ ./r-type_server
-
-start client;
-$ ./r-type_client
-```
