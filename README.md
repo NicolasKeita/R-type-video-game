@@ -7,7 +7,7 @@ R-Type is a basic "shoot them up" 2D video game.
 
 ## Prerequisites
 
-None (standalone)
+Conan (to install Boost.asio)
 
 ## Installation
 
