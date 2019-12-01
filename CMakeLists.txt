@@ -8,12 +8,13 @@ set(CMAKE_CXX_STANDARD 17)
 
 find_package(SFML 2.5.1 EXACT COMPONENTS graphics window system REQUIRED)
 add_executable(R_type_video_game
-        srcs/main.cpp
-        srcs/background.cpp)
+  srcs/main.cpp
+  srcs/background.cpp
+  srcs/Graphic.cpp)
 
 target_include_directories(R_type_video_game PUBLIC
-        ./srcs
-        lib/uti/my_network)
+  ./srcs
+  lib/uti/my_network)
 
 add_subdirectory("lib/uti/my_network")
 set(SFML_BUILD_AUDIO FALSE)

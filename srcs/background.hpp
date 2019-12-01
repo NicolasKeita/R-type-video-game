@@ -14,7 +14,7 @@
 class Background
 {
 public:
-	void display();
+	void display(sf::RenderWindow *window);
 	void init_sprite();
 	void move_background();
 	sf::Time t1 = sf::seconds(0.01f);
@@ -24,15 +24,12 @@ public:
 	int a = 0;
 	int b = 1500;
 	int c = -500;
-	int d = -300;
 	sf::Texture texture_bg1;
     sf::Texture texture_bg2;
     sf::Texture texture_deathstar;
-    sf::Texture texture_destroyers;
     sf::Sprite sprite_bg1;
 	sf::Sprite sprite_bg2;
 	sf::Sprite sprite_deathstar;
-	sf::Sprite sprite_destroyers;
 };
 
 #endif

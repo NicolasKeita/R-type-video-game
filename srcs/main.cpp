@@ -6,10 +6,13 @@
 */
 
 #include "background.hpp"
+#include "Graphic.hpp"
 
 int main(int argc, char **argv, char **env)
 {
 	Background Background;
-	Background.display();
+	GraphicWrapper GraphicWrapper;
+	GraphicWrapper.createWindows(1920, 1080);
+	Background.display(&GraphicWrapper.window);
 	return 0;
 }
