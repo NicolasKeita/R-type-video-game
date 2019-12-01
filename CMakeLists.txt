@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.12.4)
+cmake_minimum_required(VERSION 3.13.5)
 project(R_type_video_game)
 
 include("${CMAKE_BINARY_DIR}/conanbuildinfo.cmake")
@@ -23,10 +23,8 @@ target_include_directories(R_type_video_game PUBLIC
         ${SFML_LIB_DIR}/include)
 
 add_subdirectory("lib/uti/my_network")
-if (NOT MSVC)
-    target_link_directories(R_type_video_game PRIVATE
+target_link_directories(R_type_video_game PRIVATE
             ${SFML_LIB_DIR}/lib)
-endif()
 target_link_libraries(R_type_video_game PRIVATE
         my_network
         sfml-graphics
