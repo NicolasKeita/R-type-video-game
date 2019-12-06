@@ -14,7 +14,7 @@ rtype::GraphicWrapper::GraphicWrapper()
 
 void rtype::GraphicWrapper::createWindows(size_t width, size_t height)
 {
-	_window.create(sf::VideoMode(width, height), "R-Type");
+    _window.create(sf::VideoMode(width, height), "R-Type");
 }
 
 void rtype::GraphicWrapper::displayBackground()
