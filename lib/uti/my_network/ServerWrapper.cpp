@@ -11,9 +11,9 @@
 #include "ServerWrapper.hpp"
 
 uti::network::ServerWrapper::ServerWrapper()
-        : _welcomeMessage { "" },
-          _handleMessageReceived { nullptr },
-          _acceptor { nullptr }
+        : _acceptor { nullptr },
+          _welcomeMessage { "" },
+          _handleMessageReceived { nullptr }
 {}
 
 void uti::network::ServerWrapper::turnOn(unsigned int port,
@@ -71,6 +71,7 @@ uti::network::ServerWrapper::TcpConnection::TcpConnection(boost::asio::io_contex
 void uti::network::ServerWrapper::TcpConnection::handleRead(const boost::system::error_code & e,
                                                               std::size_t bytesTransferred)
 {
+    (void)bytesTransferred;
     if (e && e != boost::asio::error::eof) {
         std::cerr << "[DEBUG] read failed" << std::endl;
         return;

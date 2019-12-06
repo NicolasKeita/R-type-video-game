@@ -1,7 +1,8 @@
 cmake_minimum_required(VERSION 3.12.4)
 project(my_network_library)
 
-set(CMAKE_CXX_STANDARD		17)
+set(CMAKE_CXX_STANDARD		    17)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(Boost_USE_STATIC_LIBS        ON)
 set(Boost_USE_MULTITHREADED      ON)
 set(Boost_USE_STATIC_RUNTIME    OFF)
@@ -26,6 +27,7 @@ target_include_directories(my_network PUBLIC
         ./../my_string/)
 
 target_link_libraries(my_network ${CMAKE_THREAD_LIBS_INIT})
+target_compile_options(my_network PRIVATE -Wall -Wextra)
 
 enable_testing()
 add_subdirectory(tests/)

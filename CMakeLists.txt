@@ -9,10 +9,11 @@ else()
 endif()
 
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 add_executable(r-type_client
         srcs/main.cpp
-        srcs/background.cpp
+        srcs/Background.cpp
         srcs/GraphicWrapper.cpp)
 
 if (MSVC)
@@ -35,3 +36,5 @@ target_link_libraries(r-type_client PRIVATE
         sfml-window
         sfml-system
         ${CONAN_LIBS})
+
+target_compile_options(r-type_client PRIVATE -Wall -Wextra)

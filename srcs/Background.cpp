@@ -7,13 +7,18 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include "background.hpp"
+#include "Background.hpp"
 
-void Background::init_sprite()
+Background::Background(sf::RenderWindow & window)
+        : _window { window }
+{}
+
+void Background::init_sprite(const std::string &image1,
+                             const std::string &image2)
 {
-	texture_bg1.loadFromFile("ressources/space.jpg");
-	texture_bg2.loadFromFile("ressources/space.jpg");
-	texture_deathstar.loadFromFile("ressources/deathstar.png");
+    texture_bg1.loadFromFile(image1);
+    texture_bg2.loadFromFile(image1);
+    texture_deathstar.loadFromFile(image2);
 	sprite_bg1.setTexture(texture_bg1);
 	sprite_bg2.setTexture(texture_bg2);
 	sprite_deathstar.setTexture(texture_deathstar);
@@ -41,20 +46,19 @@ void Background::move_background()
  	}
 }
 
-void Background::display(sf::RenderWindow *window)
+void Background::displayAndMoveBackground()
 {
-	init_sprite();
-	while (window->isOpen()) {
-		sf::Event event;
-		while (window->pollEvent(event)) {
+	while (_window.isOpen()) {
+		sf::Event event{};
+		while (_window.pollEvent(event)) {
 			if (event.type == sf::Event::Closed)
-				window->close();
+				_window.close();
 		}
-		window->clear();
-		window->draw(sprite_bg1);
-		window->draw(sprite_bg2);
-		window->draw(sprite_deathstar);
-		window->display();
+		_window.clear();
+		_window.draw(sprite_bg1);
+		_window.draw(sprite_bg2);
+		_window.draw(sprite_deathstar);
+		_window.display();
 		move_background();
 	}
 }

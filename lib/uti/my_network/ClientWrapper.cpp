@@ -17,8 +17,8 @@
 
 uti::network::ClientWrapper::ClientWrapper()
         : _buf {},
-          _handleMessageReceived { nullptr },
-          _connected { false }
+          _connected { false },
+          _handleMessageReceived { nullptr }
 {}
 
 uti::network::ClientWrapper::~ClientWrapper()
