@@ -14,7 +14,7 @@ if (DEFINED ENV{BOOST_ROOT})
 endif()
 
 find_package(Boost 1.69.0 REQUIRED)
-find_package(Threads)
+find_package(Threads REQUIRED)
 include_directories(${BOOST_INCLUDE_DIRS})
 
 add_library(my_network STATIC

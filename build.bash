@@ -2,9 +2,9 @@
 
 mkdir -p ./build/
 cd ./build/ || exit
-conan install ../ --build=missing -s compiler.libcxx=libstdc++11 -g virtualenv
+conan install ../ --build=missing -s compiler.libcxx=libstdc++11 -s build_type=Debug -g virtualenv
 source activate.sh
 cmake ../
 cmake --build ./ -j "$(nproc --all)"
-cp bin/R_type_video_game ../
+cp bin/r-type_client ../
 cd ../

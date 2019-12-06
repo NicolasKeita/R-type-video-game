@@ -16,6 +16,8 @@ before_install:
   - conan remote add bincrafters https://api.bintray.com/conan/bincrafters/public-conan
 
 install:
+  # This will install the last version of Cmake
+  #
   # first we create a directory for the CMake binaries
   - DEPS_DIR="${TRAVIS_BUILD_DIR}/deps"
   - mkdir ${DEPS_DIR} && cd ${DEPS_DIR}
@@ -35,7 +37,7 @@ install:
 before_script:
   - mkdir -p ./build/
   - cd ./build/
-  - conan install ../ --build=missing -s compiler.libcxx=libstdc++11 -g virtualenv
+  - conan install ../ --build=missing -s compiler.libcxx=libstdc++11 -s build_type=Debug -g virtualenv
   - source activate.sh
   - cmake ../
 
@@ -43,7 +45,7 @@ script:
   - cmake --build ./
 
 after_script:
-  - cp bin/R_type_video_game ../
+  - cp bin/r-type_client ../
   - cd ../
   #run tests on network library
   - cd lib/uti/my_network/

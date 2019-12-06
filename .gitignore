@@ -6,7 +6,7 @@ cmake_install.cmake
 CMakeCache.txt
 *.cbp
 Makefile
-R_type_video_game
+r-type_client
 serv
 client
 *.swp
