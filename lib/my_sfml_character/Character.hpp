@@ -17,11 +17,22 @@ class Character {
     public:
         Character(CharacterGraphic graphic, const sf::Vector2f &pos);
 
-        void fillSpriteAnim(CharacterGraphic graphic);
         void drawOnWindow(sf::RenderWindow &_window);
+        void activateKeyboardMvt(sf::Event &event);
+        void move(const sf::Vector2f &offset);
+
+        [[nodiscard]] sf::Vector2f getPosition() const;
+        [[nodiscard]] sf::Vector2f getSize() const;
+
+        void setDistancePerMove(float distancePerMove);
+        void setBoundariesMvt(const sf::FloatRect &rect);
+        void setPosition(const sf::Vector2f &pos);
+        void setScale(float scale);
 
         enum Direction { RIGHT, LEFT, UP, BOTTOM };
 
+    private:
+        void _fillSpriteAnim(CharacterGraphic &graphic);
     private:
         CharacterGraphic _graphic;
         bool             _displayable;

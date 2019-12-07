@@ -30,13 +30,15 @@ int main(int argc, char **argv, char **env)
     gr.offset = 127;
     gr.frameCount = 4;
     gr.direction = CharacterGraphic::Direction::RIGHT;
-    Character c(gr, {40, 40});
+    Character c(gr, {400, 400}); // TODO : put the character inside the graphic class (inside a list of characters)
+    // TODO : fin character creation
 
     while (graphic._window.isOpen()) {
         sf::Event event{};
         while (graphic._window.pollEvent(event)) {
             if (event.type == sf::Event::Closed)
                 graphic._window.close();
+            c.activateKeyboardMvt(event);
         }
         graphic._window.clear();
         graphic.drawBackground();
