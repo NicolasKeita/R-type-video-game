@@ -46,19 +46,10 @@ void Background::move_background()
     }
 }
 
-void Background::displayAndMoveBackground()
+void Background::drawAndMoveBackground()
 {
-    while (_window.isOpen()) {
-        sf::Event event{};
-        while (_window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed)
-                _window.close();
-        }
-        _window.clear();
-        _window.draw(sprite_bg1);
-        _window.draw(sprite_bg2);
-        _window.draw(sprite_deathstar);
-        _window.display();
-        move_background();
-    }
+    _window.draw(sprite_bg1);
+    _window.draw(sprite_bg2);
+    _window.draw(sprite_deathstar);
+    move_background();
 }

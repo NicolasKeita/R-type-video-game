@@ -14,7 +14,7 @@ namespace rtype {
             virtual void createWindows(size_t width, size_t height) = 0;
             virtual void setBackground(const std::string &image1,
                                        const std::string &image2) = 0;
-            virtual void displayBackground() = 0;
+            virtual void drawBackground() = 0;
     };
 }
 

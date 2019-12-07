@@ -6,6 +6,7 @@
 */
 
 #include "GraphicWrapper.hpp"
+#include "Character.hpp"
 
 int main(int argc, char **argv, char **env)
 {
@@ -18,6 +19,29 @@ int main(int argc, char **argv, char **env)
     // TODO: move ressources/* to folder assets/background
     graphic.setBackground("ressources/space.jpg",
                           "ressources/deathstar.png");
-    graphic.displayBackground();
+
+    // TODO : transform the character creation to less lines
+    CharacterGraphic gr;
+    gr.pathImage = "ressources/character.png";
+    gr.areaFirstFrame = {40,
+                         195,
+                         100,
+                         100};
+    gr.offset = 127;
+    gr.frameCount = 4;
+    gr.direction = CharacterGraphic::Direction::RIGHT;
+    Character c(gr, {40, 40});
+
+    while (graphic._window.isOpen()) {
+        sf::Event event{};
+        while (graphic._window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed)
+                graphic._window.close();
+        }
+        graphic._window.clear();
+        graphic.drawBackground();
+        c.drawOnWindow(graphic._window);
+        graphic._window.display();
+    }
     return 0;
 }

@@ -23,11 +23,13 @@ else(MSCV)
 endif(MSVC)
 
 target_include_directories(r-type_client PUBLIC
-        ./srcs
-        lib/uti/my_network
-        ${SFML_LIB_DIR}/include)
+        ./srcs/
+        lib/uti/my_network/
+        lib/my_sfml_character/
+        ${SFML_LIB_DIR}/include/)
 
 add_subdirectory("lib/uti/my_network")
+add_subdirectory("lib/my_sfml_character/")
 target_link_directories(r-type_client PRIVATE
             ${SFML_LIB_DIR}/lib)
 target_link_libraries(r-type_client PRIVATE
@@ -35,6 +37,7 @@ target_link_libraries(r-type_client PRIVATE
         sfml-graphics
         sfml-window
         sfml-system
+        my_sfml_character
         ${CONAN_LIBS})
 
 target_compile_options(r-type_client PRIVATE -Wall -Wextra)

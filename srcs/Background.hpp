@@ -17,7 +17,7 @@ class Background {
         explicit Background(sf::RenderWindow & window);
 
         void init_sprite(const std::string &image1, const std::string &image2);
-        void displayAndMoveBackground();
+        void drawAndMoveBackground();
 
         //TODO: turn everything else to private
         void move_background();
