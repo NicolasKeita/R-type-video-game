@@ -8,6 +8,5 @@ CMakeCache.txt
 Makefile
 r-type_client
 serv
-client
 *.swp
 Testing/
