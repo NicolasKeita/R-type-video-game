@@ -8,7 +8,7 @@ Our video game has been created with the SFML library.
 
 ## Prerequisites
 
-Conan (to install Boost.asio) : https://conan.io
+Conan (to install Boost.asio) : https://conan.io (pip3 install conan)
 
 ## Usage
 
