@@ -10,6 +10,8 @@ Our video game has been created with the SFML library.
 
 Conan (to install Boost.asio) : https://conan.io
 
+Cmake version 3.12.4 minimun
+
 ## Usage
 
 Linux :
