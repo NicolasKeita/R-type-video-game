@@ -8,7 +8,7 @@ Our video game has been created with the SFML library.
 
 ## Prerequisites
 
-Conan (to install Boost.asio)
+Conan (to install Boost.asio) : https://conan.io
 
 ## Usage
 
@@ -16,7 +16,7 @@ Linux :
 
 ``` $ bash build.bash```
  
- ```$ ./R_type_video_game```
+ ```$ ./r-type_client```
  
 
 Windows :
