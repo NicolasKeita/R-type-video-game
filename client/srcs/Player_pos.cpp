@@ -11,7 +11,7 @@
 #include "GraphicWrapper.hpp"
 
 // TODO : put this to GraphicWrapper.cpp and remove this file
-void rtype::GraphicWrapper::displayPlayerPos(std::string PlayerName, int x, int y)
+void rtype::GraphicWrapper::displayPlayerPos(const std::string &PlayerName, float x, float y)
 {
 	std::string text;
 	std::string old_x;

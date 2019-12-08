@@ -11,6 +11,8 @@
 namespace rtype {
     class Player {
         public:
+            Player() = default;
+
             int ID;
             float posX;
             float posY;

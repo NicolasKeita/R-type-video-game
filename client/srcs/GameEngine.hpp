@@ -9,6 +9,7 @@
 #define R_TYPE_GAMEENGINE_HPP
 
 #include <list>
+#include <string>
 #include "Player.hpp"
 
 namespace rtype {
@@ -16,7 +17,12 @@ namespace rtype {
         public:
             GameEngine();
 
+            void saveAllPositions(const std::string &positionsProtocol);
+
+        public:
             std::list<Player> players;
+        private:
+            void _savePosition(const std::string &info);
     };
 }
 

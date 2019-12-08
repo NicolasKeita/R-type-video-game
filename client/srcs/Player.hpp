@@ -11,11 +11,12 @@
 namespace rtype {
     class Player {
         public:
-            explicit Player(int id) : ID { id } {};
+            explicit Player(int id = -1) : ID { id }, posX { -1 }, posY { -1 }, score { - 1 } {};
 
             int ID;
             float posX;
             float posY;
+            int score;
     };
 }
 

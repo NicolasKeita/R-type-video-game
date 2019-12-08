@@ -18,16 +18,25 @@ void handleNetwork(uti::network::ClientUdpMultiThreadWrapper &network, rtype::Gr
         try {
             if (graphic.gameEngine.players.empty())
                 network.sendMessage("IDREQUEST");
+            else {
+                network.sendMessage("POS " +
+                                            std::to_string(graphic.gameEngine.players.front().ID) +
+                                            " " + std::to_string(graphic.gameEngine.players.front().posY) +
+                                            " " + std::to_string(graphic.gameEngine.players.front().posX));
+            }
             std::string reply = network.getReply();
             if (boost::starts_with(reply, "ID")) {
                 int idValue = std::stoi(reply.substr(2));
                 graphic.gameEngine.players.push_front(rtype::Player(idValue));
             }
+            if (boost::starts_with(reply, "POS")) {
+                graphic.gameEngine.saveAllPositions(reply);
+            }
             if (boost::starts_with(reply, "TERMINATE")) {
                 graphic.active = false;
                 break;
             }
-            std::cout << "[client] server msg : DEBUT" << reply << "FIN" << std::endl;
+            //std::cout << "[debug client] server msg : DEBUT" << reply << "FIN" << std::endl;
         } catch (std::invalid_argument &e) {
             std::cerr << "[Rtype client] wrong arg to stoi" << std::endl;
         }
@@ -72,9 +81,15 @@ int main(int argc, char **argv, char **env)
             graphic._window.clear();
             graphic.drawBackground();
             sf::Vector2f posMyCharacter = c.getPosition();
-            graphic.displayPlayerPos(std::to_string(graphic.gameEngine.players.front().ID),
-                                     posMyCharacter.x,
-                                     posMyCharacter.y);
+            if (graphic.gameEngine.players.empty()) {
+                graphic.displayPlayerPos("No server detected", -1, -1);
+            } else {
+                graphic.gameEngine.players.front().posX = posMyCharacter.x;
+                graphic.gameEngine.players.front().posY = posMyCharacter.y;
+                graphic.displayPlayerPos(std::to_string(graphic.gameEngine.players.front().ID),
+                                         graphic.gameEngine.players.front().posX,
+                                         graphic.gameEngine.players.front().posY);
+            }
             graphic._window.draw(graphic.PlayerPos);
             c.drawOnWindow(graphic._window);
             graphic._window.display();

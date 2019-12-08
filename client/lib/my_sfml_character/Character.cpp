@@ -71,6 +71,8 @@ void Character::drawOnWindow(sf::RenderWindow &window)
 
 void Character::activateKeyboardMvt(sf::Event &event)
 {
+    if (event.type != event.KeyPressed)
+        return;
     if (event.key.code == sf::Keyboard::Z ||
             event.key.code == sf::Keyboard::Q ||
             event.key.code == sf::Keyboard::D ||

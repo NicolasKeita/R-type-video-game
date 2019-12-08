@@ -10,7 +10,8 @@ add_executable(r-type_server
 
 target_include_directories(r-type_server PUBLIC
         ./srcs/
-        lib/uti/my_network/)
+        lib/uti/my_network/
+        lib/uti/my_string/)
 
 #add_subdirectory("${CMAKE_HOME_DIRECTORY}/lib/uti/my_network" build)
 #target_link_directories(r-type_client PRIVATE ${SFML_LIB_DIR}/lib)

@@ -9,6 +9,7 @@
 #define R_TYPE_GAMEINFO_HPP
 
 #include <list>
+#include <string>
 #include "Player.hpp"
 
 namespace rtype {
@@ -16,7 +17,12 @@ namespace rtype {
         public:
             GameInfo();
 
-            std::list<Player> playersID;
+            void savePosition(const std::string &msgProtocol);
+            std::string allPositionInOneString();
+
+        public:
+
+            std::list<Player> players;
     };
 }
 
