@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2019
-** ClientWrapper.hpp
+** ClientTcpAsyncWrapper.hpp
 ** File description:
 **
 */
@@ -13,13 +13,13 @@
 #include <deque>
 #include <string>
 #include <memory>
-#include "IClientWrapper.hpp"
+#include "IClientTcpAsyncWrapper.hpp"
 
 namespace uti::network {
-    class ClientWrapper : public IClientWrapper {
+    class ClientTcpAsyncWrapper : public IClientTcpAsyncWrapper {
         public:
-            ClientWrapper();
-            ~ClientWrapper();
+            ClientTcpAsyncWrapper();
+            ~ClientTcpAsyncWrapper();
             void connectToHost(const std::string &serverAddress,
                                unsigned int port,
                                std::string (*handleMessageReceived)(const std::string &)) override;

@@ -19,8 +19,10 @@ find_package(Threads REQUIRED)
 include_directories(${BOOST_INCLUDE_DIRS})
 
 add_library(my_network STATIC
-        ServerWrapper.cpp
-        ClientWrapper.cpp)
+        ServerTcpAsyncWrapper.cpp
+        ClientTcpAsyncWrapper.cpp
+        ServerUdpMultiThreadWrapper.cpp
+        ClientUdpMultiThreadWrapper.cpp)
 
 target_include_directories(my_network PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}

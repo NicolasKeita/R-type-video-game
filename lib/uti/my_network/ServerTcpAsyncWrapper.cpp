@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2019
-** ServerWrapper.cpp
+** ServerTcpAsyncWrapper.cpp
 ** File description:
 **
 */
@@ -8,17 +8,17 @@
 #include <string>
 #include <boost/smart_ptr/make_shared.hpp>
 #include <utility>
-#include "ServerWrapper.hpp"
+#include "ServerTcpAsyncWrapper.hpp"
 
-uti::network::ServerWrapper::ServerWrapper()
+uti::network::ServerTcpAsyncWrapper::ServerTcpAsyncWrapper()
         : _acceptor { nullptr },
           _welcomeMessage { "" },
           _handleMessageReceived { nullptr }
 {}
 
-void uti::network::ServerWrapper::turnOn(unsigned int port,
-                                         std::string (*handleMessageReceived)(const std::string &),
-                                         const std::string &welcomeMessage)
+void uti::network::ServerTcpAsyncWrapper::turnOn(unsigned int port,
+                                                 std::string (*handleMessageReceived)(const std::string &),
+                                                 const std::string &welcomeMessage)
 {
     _welcomeMessage = welcomeMessage;
     _handleMessageReceived = handleMessageReceived;
@@ -29,21 +29,21 @@ void uti::network::ServerWrapper::turnOn(unsigned int port,
     _io_context.run();
 }
 
-void uti::network::ServerWrapper::_startAccept()
+void uti::network::ServerTcpAsyncWrapper::_startAccept()
 {
     auto newConnection =
-            boost::make_shared<typename uti::network::ServerWrapper::TcpConnection>(_io_context,
-                                                                                      _welcomeMessage,
-                                                                                      _handleMessageReceived);
+            boost::make_shared<typename uti::network::ServerTcpAsyncWrapper::TcpConnection>(_io_context,
+                                                                                            _welcomeMessage,
+                                                                                            _handleMessageReceived);
     _acceptor->async_accept(newConnection->socket(),
-                            boost::bind(&ServerWrapper::_handleAccept,
+                            boost::bind(&ServerTcpAsyncWrapper::_handleAccept,
                                         this,
                                         newConnection,
                                         boost::asio::placeholders::error));
 }
 
-void uti::network::ServerWrapper::_handleAccept(const boost::shared_ptr<uti::network::ServerWrapper::TcpConnection> &new_connection,
-                                                const boost::system::error_code &error)
+void uti::network::ServerTcpAsyncWrapper::_handleAccept(const boost::shared_ptr<uti::network::ServerTcpAsyncWrapper::TcpConnection> &new_connection,
+                                                        const boost::system::error_code &error)
 {
     if (!error) {
         new_connection->start();
@@ -52,24 +52,24 @@ void uti::network::ServerWrapper::_handleAccept(const boost::shared_ptr<uti::net
     _startAccept();
 }
 
-void uti::network::ServerWrapper::sendMessageToTheLastestClient(const std::string &message)
+void uti::network::ServerTcpAsyncWrapper::sendMessageToTheLastestClient(const std::string &message)
 {
     if (_welcomeMessage.back() != '\n')
         _welcomeMessage += '\n';
     _all_clients.back()->sendMessage(message);
 }
 
-uti::network::ServerWrapper::TcpConnection::TcpConnection(boost::asio::io_context &io_context,
-                                                            std::string welcomeMessage,
-                                                            std::string (*handleMessageReceived)(const std::string &))
+uti::network::ServerTcpAsyncWrapper::TcpConnection::TcpConnection(boost::asio::io_context &io_context,
+                                                                  std::string welcomeMessage,
+                                                                  std::string (*handleMessageReceived)(const std::string &))
         : socket_ { io_context },
           _welcomeMessage {std::move( welcomeMessage )},
           _buffer {},
           _handleMessageReceived { handleMessageReceived }
 {}
 
-void uti::network::ServerWrapper::TcpConnection::handleRead(const boost::system::error_code & e,
-                                                              std::size_t bytesTransferred)
+void uti::network::ServerTcpAsyncWrapper::TcpConnection::handleRead(const boost::system::error_code & e,
+                                                                    std::size_t bytesTransferred)
 {
     (void)bytesTransferred;
     if (e && e != boost::asio::error::eof) {
@@ -100,19 +100,19 @@ void uti::network::ServerWrapper::TcpConnection::handleRead(const boost::system:
                                         boost::asio::placeholders::bytes_transferred));
 }
 
-void uti::network::ServerWrapper::TcpConnection::handleWrite()
+void uti::network::ServerTcpAsyncWrapper::TcpConnection::handleWrite()
 {
     //std::cout << "Je viens d'envoyer !" << std::endl;
     // stuff to do after sending a message
 }
 
-void uti::network::ServerWrapper::TcpConnection::sendMessage(const std::string &message)
+void uti::network::ServerTcpAsyncWrapper::TcpConnection::sendMessage(const std::string &message)
 {
     boost::asio::async_write(socket_, boost::asio::buffer(message),
                              boost::bind(&TcpConnection::handleWrite, shared_from_this()));
 }
 
-void uti::network::ServerWrapper::TcpConnection::start()
+void uti::network::ServerTcpAsyncWrapper::TcpConnection::start()
 {
     boost::asio::async_write(socket_, boost::asio::buffer(_welcomeMessage),
                              boost::bind(&TcpConnection::handleWrite, shared_from_this()));
@@ -122,7 +122,7 @@ void uti::network::ServerWrapper::TcpConnection::start()
                                         boost::asio::placeholders::bytes_transferred));
 }
 
-tcp::socket & uti::network::ServerWrapper::TcpConnection::socket()
+tcp::socket & uti::network::ServerTcpAsyncWrapper::TcpConnection::socket()
 {
     return socket_;
 }

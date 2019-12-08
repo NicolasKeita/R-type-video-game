@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2019
-** ServerWrapper.hpp
+** ServerTcpAsyncWrapper.hpp
 ** File description:
 **
 */
@@ -22,7 +22,7 @@
 #include <boost/noncopyable.hpp>
 #include <boost/asio/buffer.hpp>
 #include <boost/format.hpp>
-#include "IServerWrapper.hpp"
+#include "IServerTcpAsyncWrapper.hpp"
 
 
 using boost::asio::ip::tcp;
@@ -31,11 +31,11 @@ namespace uti::network {
     /*
      * Blocking server
      */
-    class ServerWrapper : public IServerWrapper {
+    class ServerTcpAsyncWrapper : public IServerTcpAsyncWrapper {
         public: // consider private
             class TcpConnection;
         public:
-            ServerWrapper();
+            ServerTcpAsyncWrapper();
             void turnOn(unsigned int port,
                           std::string (*handleMessageReceived)(const std::string &),
                           const std::string &welcomeMessage) override;

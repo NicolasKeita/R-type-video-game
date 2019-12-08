@@ -11,7 +11,7 @@
 #include <string>
 
 namespace uti::network {
-    class IServerWrapper {
+    class IServerTcpAsyncWrapper {
             /*
              * Blocking server
              */

@@ -2,7 +2,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <unistd.h>
-#include "ClientWrapper.hpp"
+#include "ClientTcpAsyncWrapper.hpp"
 
 std::string handleMessageReceived(const std::string &messageReceived)
 {
@@ -18,7 +18,7 @@ std::string handleMessageReceived(const std::string &messageReceived)
 
 int main()
 {
-    uti::network::ClientWrapper client;
+    uti::network::ClientTcpAsyncWrapper client;
     try {
         client.connectToHost("0.0.0.0", 42424, &handleMessageReceived);
         client.sendMessage("AB");

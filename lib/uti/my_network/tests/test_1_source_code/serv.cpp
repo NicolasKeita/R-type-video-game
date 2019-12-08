@@ -6,7 +6,7 @@
 */
 
 #include <iostream>
-#include "ServerWrapper.hpp"
+#include "ServerTcpAsyncWrapper.hpp"
 
 std::string handleMessageReceived(const std::string &messageReceived)
 {
@@ -30,7 +30,7 @@ int main()
     {
         // Blocking
         
-	uti::network::ServerWrapper server;
+	uti::network::ServerTcpAsyncWrapper server;
 
         server.turnOn(42424,
 			&handleMessageReceived,

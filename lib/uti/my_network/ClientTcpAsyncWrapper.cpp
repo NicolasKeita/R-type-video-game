@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2019
-** ClientWrapper.cpp
+** ClientTcpAsyncWrapper.cpp
 ** File description:
 **
 */
@@ -12,23 +12,23 @@
 #include <boost/bind.hpp>
 #include <boost/asio.hpp>
 #include <boost/asio/buffer.hpp>
-#include "ClientWrapper.hpp"
+#include "ClientTcpAsyncWrapper.hpp"
 #include "MyStrTok.hpp"
 
-uti::network::ClientWrapper::ClientWrapper()
+uti::network::ClientTcpAsyncWrapper::ClientTcpAsyncWrapper()
         : _buf {},
           _connected { false },
           _handleMessageReceived { nullptr }
 {}
 
-uti::network::ClientWrapper::~ClientWrapper()
+uti::network::ClientTcpAsyncWrapper::~ClientTcpAsyncWrapper()
 {
     _t->join();
 }
 
-void uti::network::ClientWrapper::connectToHost(const std::string &serverAddress,
-                                                unsigned int port,
-                                                std::string (*handleMessageReceived)(const std::string &))
+void uti::network::ClientTcpAsyncWrapper::connectToHost(const std::string &serverAddress,
+                                                        unsigned int port,
+                                                        std::string (*handleMessageReceived)(const std::string &))
 {
     _resolver = std::make_unique<boost::asio::ip::tcp::resolver>(_io_context);
     _endpoints = _resolver->resolve(serverAddress, std::to_string(port));
@@ -37,14 +37,14 @@ void uti::network::ClientWrapper::connectToHost(const std::string &serverAddress
     boost::asio::connect(*_socket, _endpoints);
     _t = std::make_unique<std::thread>([&](){ _io_context.run();});
     _socket->async_read_some(boost::asio::buffer(_buf),
-                             boost::bind(&ClientWrapper::_handleRead,
+                             boost::bind(&ClientTcpAsyncWrapper::_handleRead,
                                          this,
                                          boost::asio::placeholders::error,
                                          boost::asio::placeholders::bytes_transferred));
     _connected = true;
 }
 
-void uti::network::ClientWrapper::sendMessage(const std::string &message_origin)
+void uti::network::ClientTcpAsyncWrapper::sendMessage(const std::string &message_origin)
 {
     if (!_connected)
         return;
@@ -60,14 +60,14 @@ void uti::network::ClientWrapper::sendMessage(const std::string &message_origin)
     }
 }
 
-void uti::network::ClientWrapper::_do_write()
+void uti::network::ClientTcpAsyncWrapper::_do_write()
 {
     _socket->write_some(boost::asio::buffer(_messagesToSend.front()));
     _messagesToSend.pop_front();
 }
 
-void uti::network::ClientWrapper::_handleRead(const boost::system::error_code & error,
-                                              std::size_t bytesTransferred)
+void uti::network::ClientTcpAsyncWrapper::_handleRead(const boost::system::error_code & error,
+                                                      std::size_t bytesTransferred)
 {
     if (error == boost::asio::error::eof) {
         std::cerr << "[DEBUG] Connection closed" << std::endl;
@@ -89,7 +89,7 @@ void uti::network::ClientWrapper::_handleRead(const boost::system::error_code & 
         }
     }
     _socket->async_read_some(boost::asio::buffer(_buf),
-                             boost::bind(&ClientWrapper::_handleRead,
+                             boost::bind(&ClientTcpAsyncWrapper::_handleRead,
                                          this,
                                          boost::asio::placeholders::error,
                                          boost::asio::placeholders::bytes_transferred));

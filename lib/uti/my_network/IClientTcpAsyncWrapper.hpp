@@ -11,7 +11,7 @@
 #include <string>
 
 namespace uti::network {
-    class IClientWrapper {
+    class IClientTcpAsyncWrapper {
         public:
             /*
              * When a new message from the server has come, handleMessageReceived() will be called.
