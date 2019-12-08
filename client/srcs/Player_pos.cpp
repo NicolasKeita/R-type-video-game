@@ -22,7 +22,7 @@ void rtype::GraphicWrapper::displayPlayerPos(std::string PlayerName, int x, int 
 	old_x = new_x.str();
 	new_y << y;
 	old_y = new_y.str();
-	text = PlayerName + ":x:" + old_x + "y:" + old_y;
+	text = "PlayerID: " + PlayerName + " ; x:" + old_x + "; y:" + old_y;
 	PlayerPos.setString(text);
-	PlayerPos.setPosition(1550, 0);
+	PlayerPos.setPosition(1500, 0);
 }

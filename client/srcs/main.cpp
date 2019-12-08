@@ -15,7 +15,8 @@ void handleNetwork(uti::network::ClientUdpMultiThreadWrapper &network, rtype::Gr
 {
     while (true) {
         try {
-            network.sendMessage("IDREQUEST");
+            if (graphic.gameEngine.playersID.empty())
+                network.sendMessage("IDREQUEST");
             std::string reply = network.getReply();
             if (boost::starts_with(reply, "ID")) {
                 int idValue = std::stoi(reply.substr(2));
@@ -43,11 +44,6 @@ int main(int argc, char **argv, char **env)
         rtype::GraphicWrapper graphic;
         std::thread thread(handleNetwork, std::ref(network), std::ref(graphic));
 
-        graphic.displayPlayerPos("Lilian", 12, 10);
-        sf::Font font;
-        font.loadFromFile("assets/arial.ttf");
-        graphic.PlayerPos.setFont(font);
-
         graphic.createWindows(1920, 1080);
         graphic.setBackground("assets/background/space.jpg",
                               "assets/background/deathstar.png");
@@ -59,6 +55,11 @@ int main(int argc, char **argv, char **env)
                      CharacterGraphic::Direction::RIGHT},
                     {400, 400}); // TODO : put the character inside the graphic class (inside a list of characters)
 
+
+        sf::Font font;
+        font.loadFromFile("assets/arial.ttf");
+        graphic.PlayerPos.setFont(font);
+
         while (graphic._window.isOpen()) {
             sf::Event event{};
             while (graphic._window.pollEvent(event)) {
@@ -68,6 +69,9 @@ int main(int argc, char **argv, char **env)
             }
             graphic._window.clear();
             graphic.drawBackground();
+            sf::Vector2f posMyCharacter = c.getPosition();
+            std::cerr << "x : " << posMyCharacter.x << std::endl;
+            graphic.displayPlayerPos(std::to_string(graphic.gameEngine.playersID.front()), posMyCharacter.x, posMyCharacter.y);
             graphic._window.draw(graphic.PlayerPos);
             c.drawOnWindow(graphic._window);
             graphic._window.display();

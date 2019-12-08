@@ -8,6 +8,7 @@ add_executable(r-type_client
 		srcs/main.cpp
 		srcs/Background.cpp
 		srcs/GraphicWrapper.cpp
+		srcs/GameEngine.cpp
 		srcs/Player_pos.cpp)
 
 if (MSVC)

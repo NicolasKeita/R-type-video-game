@@ -13,6 +13,8 @@
 namespace rtype {
     class GameEngine {
         public:
+            GameEngine();
+
             std::list<int> playersID;
     };
 }
