@@ -42,7 +42,12 @@ int main(int argc, char **argv, char **env)
 
         rtype::GraphicWrapper graphic;
         std::thread thread(handleNetwork, std::ref(network), std::ref(graphic));
-        //std::thread thread(handleNetwork, network, std::ref(graphic));
+
+        graphic.displayPlayerPos("Lilian", 12, 10);
+        sf::Font font;
+        font.loadFromFile("assets/arial.ttf");
+        graphic.PlayerPos.setFont(font);
+
         graphic.createWindows(1920, 1080);
         graphic.setBackground("assets/background/space.jpg",
                               "assets/background/deathstar.png");
@@ -63,6 +68,7 @@ int main(int argc, char **argv, char **env)
             }
             graphic._window.clear();
             graphic.drawBackground();
+            graphic._window.draw(graphic.PlayerPos);
             c.drawOnWindow(graphic._window);
             graphic._window.display();
         }
