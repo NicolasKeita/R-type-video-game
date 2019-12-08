@@ -21,7 +21,7 @@ target_include_directories(r-type_client PUBLIC
         lib/my_sfml_character/
         ${SFML_LIB_DIR}/include/)
 
-add_subdirectory("${CMAKE_HOME_DIRECTORY}/lib/uti/my_network" build)
+#add_subdirectory("${CMAKE_HOME_DIRECTORY}/lib/uti/my_network" build)
 add_subdirectory("lib/my_sfml_character/")
 target_link_directories(r-type_client PRIVATE
             ${SFML_LIB_DIR}/lib)

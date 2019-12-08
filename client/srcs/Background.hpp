@@ -12,6 +12,7 @@
 #include <string>
 #include <SFML/Graphics.hpp>
 
+//TODO put a namespace
 class Background {
     public:
         explicit Background(sf::RenderWindow & window);

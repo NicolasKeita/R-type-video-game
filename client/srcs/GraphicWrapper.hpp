@@ -12,6 +12,7 @@
 #include <SFML/Graphics.hpp>
 #include "IGraphicWrapper.hpp"
 #include "Background.hpp"
+#include "GameEngine.hpp"
 
 namespace rtype {
     class GraphicWrapper : public IGraphicWrapper {
@@ -22,7 +23,8 @@ namespace rtype {
             void setBackground(const std::string &image1, const std::string &image2) override;
 
         public:
-            sf::RenderWindow _window; // TODO : put the window in private
+            sf::RenderWindow    _window; // TODO : put the window in private
+            GameEngine          gameEngine;
         private:
             Background       _background;
     };
