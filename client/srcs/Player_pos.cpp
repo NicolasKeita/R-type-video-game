@@ -10,6 +10,7 @@
 #include <sstream>
 #include "GraphicWrapper.hpp"
 
+// TODO : put this to GraphicWrapper.cpp and remove this file
 void rtype::GraphicWrapper::displayPlayerPos(std::string PlayerName, int x, int y)
 {
 	std::string text;

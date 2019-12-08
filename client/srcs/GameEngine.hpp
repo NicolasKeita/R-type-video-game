@@ -9,13 +9,14 @@
 #define R_TYPE_GAMEENGINE_HPP
 
 #include <list>
+#include "Player.hpp"
 
 namespace rtype {
     class GameEngine {
         public:
             GameEngine();
 
-            std::list<int> playersID;
+            std::list<Player> players;
     };
 }
 

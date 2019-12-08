@@ -9,12 +9,14 @@
 #include "GraphicWrapper.hpp"
 
 rtype::GraphicWrapper::GraphicWrapper()
-        : _background { _window }
+        : active { false },
+          _background { _window }
 {}
 
 void rtype::GraphicWrapper::createWindows(size_t width, size_t height)
 {
     _window.create(sf::VideoMode(width, height), "R-Type");
+    active = true;
 }
 
 void rtype::GraphicWrapper::drawBackground()

@@ -10,20 +10,23 @@
 #include "GraphicWrapper.hpp"
 #include "Character.hpp"
 #include "ClientUdpMultiThreadWrapper.hpp"
+#include "Player.hpp"
 
 void handleNetwork(uti::network::ClientUdpMultiThreadWrapper &network, rtype::GraphicWrapper &graphic)
 {
     while (true) {
         try {
-            if (graphic.gameEngine.playersID.empty())
+            if (graphic.gameEngine.players.empty())
                 network.sendMessage("IDREQUEST");
             std::string reply = network.getReply();
             if (boost::starts_with(reply, "ID")) {
                 int idValue = std::stoi(reply.substr(2));
-                graphic.gameEngine.playersID.push_front(idValue);
+                graphic.gameEngine.players.push_front(rtype::Player(idValue));
             }
-            if (boost::starts_with(reply, "TERMINATE"))
+            if (boost::starts_with(reply, "TERMINATE")) {
+                graphic.active = false;
                 break;
+            }
             std::cout << "[client] server msg : DEBUT" << reply << "FIN" << std::endl;
         } catch (std::invalid_argument &e) {
             std::cerr << "[Rtype client] wrong arg to stoi" << std::endl;
@@ -55,7 +58,6 @@ int main(int argc, char **argv, char **env)
                      CharacterGraphic::Direction::RIGHT},
                     {400, 400}); // TODO : put the character inside the graphic class (inside a list of characters)
 
-
         sf::Font font;
         font.loadFromFile("assets/arial.ttf");
         graphic.PlayerPos.setFont(font);
@@ -63,15 +65,16 @@ int main(int argc, char **argv, char **env)
         while (graphic._window.isOpen()) {
             sf::Event event{};
             while (graphic._window.pollEvent(event)) {
-                if (event.type == sf::Event::Closed)
+                if (event.type == sf::Event::Closed || !graphic.active)
                     graphic._window.close();
                 c.activateKeyboardMvt(event);
             }
             graphic._window.clear();
             graphic.drawBackground();
             sf::Vector2f posMyCharacter = c.getPosition();
-            std::cerr << "x : " << posMyCharacter.x << std::endl;
-            graphic.displayPlayerPos(std::to_string(graphic.gameEngine.playersID.front()), posMyCharacter.x, posMyCharacter.y);
+            graphic.displayPlayerPos(std::to_string(graphic.gameEngine.players.front().ID),
+                                     posMyCharacter.x,
+                                     posMyCharacter.y);
             graphic._window.draw(graphic.PlayerPos);
             c.drawOnWindow(graphic._window);
             graphic._window.display();

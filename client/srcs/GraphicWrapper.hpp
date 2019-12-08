@@ -27,6 +27,7 @@ namespace rtype {
             sf::RenderWindow    _window; // TODO : put the window in private
             GameEngine          gameEngine;
             sf::Text            PlayerPos;
+            bool                active;
         private:
             Background       _background;
     };

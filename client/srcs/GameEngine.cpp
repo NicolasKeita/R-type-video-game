@@ -8,7 +8,6 @@
 #include "GameEngine.hpp"
 
 rtype::GameEngine::GameEngine()
-        :   playersID {}
 {
 
 }
