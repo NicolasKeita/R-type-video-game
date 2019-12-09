@@ -31,6 +31,7 @@ void handleNetwork(uti::network::ClientUdpMultiThreadWrapper &network, rtype::Gr
             }
             if (boost::starts_with(reply, "POS")) {
                 graphic.gameEngine.saveAllPositions(reply);
+                graphic.playerBoard.firstDataReceived = true;
             }
             if (boost::starts_with(reply, "TERMINATE")) {
                 graphic.active = false;
@@ -67,32 +68,21 @@ int main(int argc, char **argv, char **env)
                      CharacterGraphic::Direction::RIGHT},
                     {400, 400}); // TODO : put the character inside the graphic class (inside a list of characters)
 
-        sf::Font font;
-        font.loadFromFile("assets/arial.ttf");
-        graphic.PlayerPos.setFont(font);
-
-        while (graphic._window.isOpen()) {
+        while (graphic.window.isOpen()) {
             sf::Event event{};
-            while (graphic._window.pollEvent(event)) {
+            while (graphic.window.pollEvent(event)) {
                 if (event.type == sf::Event::Closed || !graphic.active)
-                    graphic._window.close();
+                    graphic.window.close();
                 c.activateKeyboardMvt(event);
             }
-            graphic._window.clear();
+            graphic.window.clear();
             graphic.drawBackground();
-            sf::Vector2f posMyCharacter = c.getPosition();
-            if (graphic.gameEngine.players.empty()) {
-                graphic.displayPlayerPos("No server detected", -1, -1);
-            } else {
-                graphic.gameEngine.players.front().posX = posMyCharacter.x;
-                graphic.gameEngine.players.front().posY = posMyCharacter.y;
-                graphic.displayPlayerPos(std::to_string(graphic.gameEngine.players.front().ID),
-                                         graphic.gameEngine.players.front().posX,
-                                         graphic.gameEngine.players.front().posY);
-            }
-            graphic._window.draw(graphic.PlayerPos);
-            c.drawOnWindow(graphic._window);
-            graphic._window.display();
+            graphic.gameEngine.updateMainPosition(c.getPosition());
+            graphic.playerBoard.setText(graphic.gameEngine.players);
+
+            graphic.playerBoard.drawOnWindow(graphic.window);
+            c.drawOnWindow(graphic.window);
+            graphic.window.display();
         }
         thread.join();
     }

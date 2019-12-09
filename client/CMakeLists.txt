@@ -9,7 +9,8 @@ add_executable(r-type_client
 		srcs/Background.cpp
 		srcs/GraphicWrapper.cpp
 		srcs/GameEngine.cpp
-		srcs/Player_pos.cpp)
+		srcs/PlayerBoard.cpp
+        )
 
 if (MSVC)
 	set(SFML_LIB_DIR "lib/SFML-2.5.1/windows")

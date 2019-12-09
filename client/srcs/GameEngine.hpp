@@ -10,6 +10,7 @@
 
 #include <list>
 #include <string>
+#include <SFML/Graphics.hpp>
 #include "Player.hpp"
 
 namespace rtype {
@@ -18,6 +19,7 @@ namespace rtype {
             GameEngine();
 
             void saveAllPositions(const std::string &positionsProtocol);
+            void updateMainPosition(const sf::Vector2f &pos);
 
         public:
             std::list<Player> players;

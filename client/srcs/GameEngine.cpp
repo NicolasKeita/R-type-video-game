@@ -46,3 +46,11 @@ void rtype::GameEngine::_savePosition(const std::string &info)
         players.push_front(p);
     }
 }
+
+void rtype::GameEngine::updateMainPosition(const sf::Vector2f & pos)
+{
+    if (!players.empty()) {
+        players.front().posX = pos.x;
+        players.front().posY = pos.y;
+    }
+}

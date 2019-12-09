@@ -6,16 +6,17 @@
 */
 
 #include <iostream>
+#include <sstream>
 #include "GraphicWrapper.hpp"
 
 rtype::GraphicWrapper::GraphicWrapper()
         : active { false },
-          _background { _window }
+          _background {window }
 {}
 
 void rtype::GraphicWrapper::createWindows(size_t width, size_t height)
 {
-    _window.create(sf::VideoMode(width, height), "R-Type");
+    window.create(sf::VideoMode(width, height), "R-Type");
     active = true;
 }
 
@@ -29,3 +30,4 @@ void rtype::GraphicWrapper::setBackground(const std::string & image1,
 {
     _background.init_sprite(image1, image2);
 }
+

@@ -18,9 +18,9 @@ rtype::GameInfo::GameInfo()
 
 void rtype::GameInfo::savePosition(const std::string & msgProtocol)
 {
-    std::string str = msgProtocol;
+    std::cerr << "Message proto:" << msgProtocol << "FIN" << std::endl;
     std::vector<std::string> positionToken;
-    uti::myStrTok(str, positionToken, " ");
+    uti::myStrTok(msgProtocol, positionToken, " ");
     Player p{};
     p.ID = std::stoi(positionToken.at(1));
     p.posY = std::stof(positionToken.at(2));
