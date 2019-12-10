@@ -23,6 +23,7 @@ target_include_directories(r-type_client PUBLIC
 		./srcs/
 		../lib/uti/my_network/
 		../lib/uti/my_string/
+		../lib/uti/my_prog_args/
 		lib/my_sfml_character/
 		lib/my_sfml_cinematic/
 		${SFML_LIB_DIR}/include/)

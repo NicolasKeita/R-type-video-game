@@ -13,17 +13,28 @@
 #include "Player.hpp"
 #include "NetworkManager.hpp"
 #include "GameEngine.hpp"
+#include "MyProgArgs.hpp"
 
 
 int main(int argc, char **argv, char **env)
 {
-    (void)argc;
-    (void)argv;
-    (void)env;
+    uti::MyProgArgs args(argc, argv, env, 2);
+    int port;
+
+    try {
+        port = std::stoi(args.getArgs().at(2));
+        if (port < 2000) {
+            throw std::invalid_argument("Pick higher PORT");
+        }
+    }
+    catch (std::invalid_argument &e) {
+        std::cerr << "Wrong port\n" << e.what() << std::endl;
+        return 84;
+    }
 
     rtype::GameEngine       gameEngine;
     rtype::GraphicWrapper   graphic;
-    NetworkManager          network("0.0.0.0", 42424); // TODO convert to argv
+    NetworkManager network(args.getArgs().at(1), port);
 
     try {
         std::thread thread(&NetworkManager::handleProtocol, &network, std::ref(gameEngine));
