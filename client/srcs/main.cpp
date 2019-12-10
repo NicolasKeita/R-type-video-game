@@ -11,38 +11,9 @@
 #include "Character.hpp"
 #include "ClientUdpMultiThreadWrapper.hpp"
 #include "Player.hpp"
+#include "NetworkManager.hpp"
+#include "GameEngine.hpp"
 
-void handleNetwork(uti::network::ClientUdpMultiThreadWrapper &network, rtype::GraphicWrapper &graphic)
-{
-    while (true) {
-        try {
-            if (graphic.gameEngine.players.empty())
-                network.sendMessage("IDREQUEST");
-            else {
-                network.sendMessage("POS " +
-                                            std::to_string(graphic.gameEngine.players.front().ID) +
-                                            " " + std::to_string(graphic.gameEngine.players.front().posY) +
-                                            " " + std::to_string(graphic.gameEngine.players.front().posX));
-            }
-            std::string reply = network.getReply();
-            if (boost::starts_with(reply, "ID")) {
-                int idValue = std::stoi(reply.substr(2));
-                graphic.gameEngine.players.push_front(rtype::Player(idValue));
-            }
-            if (boost::starts_with(reply, "POS")) {
-                graphic.gameEngine.saveAllPositions(reply);
-                graphic.playerBoard.firstDataReceived = true;
-            }
-            if (boost::starts_with(reply, "TERMINATE")) {
-                graphic.active = false;
-                break;
-            }
-            //std::cout << "[debug client] server msg : DEBUT" << reply << "FIN" << std::endl;
-        } catch (std::invalid_argument &e) {
-            std::cerr << "[Rtype client] wrong arg to stoi" << std::endl;
-        }
-    }
-}
 
 int main(int argc, char **argv, char **env)
 {
@@ -50,12 +21,12 @@ int main(int argc, char **argv, char **env)
     (void)argv;
     (void)env;
 
-    try {
-        uti::network::ClientUdpMultiThreadWrapper network;
-        network.setServer("0.0.0.0", 42424);
+    rtype::GameEngine       gameEngine;
+    rtype::GraphicWrapper   graphic;
+    NetworkManager          network("0.0.0.0", 42424); // TODO convert to argv
 
-        rtype::GraphicWrapper graphic;
-        std::thread thread(handleNetwork, std::ref(network), std::ref(graphic));
+    try {
+        std::thread thread(&NetworkManager::handleProtocol, &network, std::ref(gameEngine));
 
         graphic.createWindows(1920, 1080);
         graphic.setBackground("assets/background/space.jpg",

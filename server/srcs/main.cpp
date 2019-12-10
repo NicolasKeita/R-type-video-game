@@ -12,7 +12,7 @@
 
 std::string handleMessageReceived(const std::string &messageReceived)
 {
-    //std::cerr << "[debug]Message receive: DEBUT" << messageReceived << "FIN" << std::endl;
+    std::cerr << "[debug]Message receive: DEBUT" << messageReceived << "FIN" << std::endl;
 
     static int i = 1;
     static rtype::GameInfo gameInfo;

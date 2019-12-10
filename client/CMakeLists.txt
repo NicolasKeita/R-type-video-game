@@ -10,6 +10,7 @@ add_executable(r-type_client
 		srcs/GraphicWrapper.cpp
 		srcs/GameEngine.cpp
 		srcs/PlayerBoard.cpp
+		srcs/NetworkManager.cpp
         )
 
 if (MSVC)
@@ -20,22 +21,27 @@ endif(MSVC)
 
 target_include_directories(r-type_client PUBLIC
 		./srcs/
-		lib/uti/my_network/
+		../lib/uti/my_network/
+		../lib/uti/my_string/
 		lib/my_sfml_character/
+		lib/my_sfml_cinematic/
 		${SFML_LIB_DIR}/include/)
 
 add_subdirectory("lib/my_sfml_character/")
+add_subdirectory("lib/my_sfml_cinematic/")
 target_link_directories(r-type_client PRIVATE
-		${SFML_LIB_DIR}/lib)
+		${SFML_LIB_DIR}/lib
+		../lib/uti/my_network)
 target_link_libraries(r-type_client PRIVATE
 		my_network
 		sfml-graphics
 		sfml-window
 		sfml-system
 		my_sfml_character
+		my_sfml_cinematic
 		${CONAN_LIBS})
 
-target_compile_options(r-type_client PRIVATE -Wall -Wextra)
+target_compile_options(r-type_client PRIVATE -Wall -Wextra -g3)
 
 add_custom_command(TARGET r-type_client
 		POST_BUILD

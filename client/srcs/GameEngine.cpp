@@ -9,7 +9,7 @@
 #include "GameEngine.hpp"
 #include "MyStrTok.hpp"
 
-rtype::GameEngine::GameEngine()
+rtype::GameEngine::GameEngine() : scene { INTRO }
 {
 
 }

@@ -16,13 +16,15 @@
 namespace rtype {
     class GameEngine {
         public:
+            enum Scene { INTRO, WORLD, END };
             GameEngine();
 
             void saveAllPositions(const std::string &positionsProtocol);
             void updateMainPosition(const sf::Vector2f &pos);
 
         public:
-            std::list<Player> players;
+            Scene               scene;
+            std::list<Player>   players;
         private:
             void _savePosition(const std::string &info);
     };

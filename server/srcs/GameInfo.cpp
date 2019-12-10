@@ -12,13 +12,10 @@
 #include "GameInfo.hpp"
 
 rtype::GameInfo::GameInfo()
-{
-
-}
+{}
 
 void rtype::GameInfo::savePosition(const std::string & msgProtocol)
 {
-    std::cerr << "Message proto:" << msgProtocol << "FIN" << std::endl;
     std::vector<std::string> positionToken;
     uti::myStrTok(msgProtocol, positionToken, " ");
     Player p{};

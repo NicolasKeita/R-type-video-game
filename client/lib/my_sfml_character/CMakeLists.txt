@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 add_library(my_sfml_character STATIC
         Character.cpp
         CreateSpriteFromPath.cpp
-        setOrigin.cpp)
+        setOriginMiddle.cpp)
 
 if (MSVC)
     set(SFML_LIB_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../SFML-2.5.1/windows")

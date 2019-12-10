@@ -40,6 +40,7 @@ void rtype::PlayerBoard::_setTextOneArea(const std::string &PlayerName,
                                           float playerY,
                                           int posYOnScreen)
 {
+    //auto createText = [&]()
     std::string text;
     std::string old_x;
     std::string old_y;
