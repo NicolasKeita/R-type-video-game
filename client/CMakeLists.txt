@@ -33,6 +33,7 @@ add_subdirectory("lib/my_sfml_cinematic/")
 target_link_directories(r-type_client PRIVATE
 		${SFML_LIB_DIR}/lib
 		../lib/uti/my_network)
+
 target_link_libraries(r-type_client PRIVATE
 		my_network
 		sfml-graphics
