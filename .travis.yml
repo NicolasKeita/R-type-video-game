@@ -14,7 +14,7 @@ before_install:
   - $PY_CMD -m pip install --user --upgrade conan
   - conan user
   - conan remote add bincrafters https://api.bintray.com/conan/bincrafters/public-conan
-  - sudo apt-get install -y libopenal-dev libalut-dev libopenal
+  - sudo apt-get install -y libopenal-dev libalut-dev build-dep libsfml
 
 install:
   # This will install the last version of Cmake

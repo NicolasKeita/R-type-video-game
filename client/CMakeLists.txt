@@ -39,6 +39,7 @@ target_link_libraries(r-type_client PRIVATE
 		sfml-graphics
 		sfml-window
 		sfml-system
+		sfml-audio
 		my_sfml_character
 		my_sfml_cinematic
 		${CONAN_LIBS})
