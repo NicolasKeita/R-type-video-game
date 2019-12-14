@@ -58,12 +58,25 @@ int main(int argc, char **argv, char **env)
                 c.activateKeyboardMvt(event);
             }
             graphic.window.clear();
-            graphic.drawBackground();
-            graphic.gameEngine.updateMainPosition(c.getPosition());
-            graphic.playerBoard.setText(graphic.gameEngine.players);
-
-            graphic.playerBoard.drawOnWindow(graphic.window);
-            c.drawOnWindow(graphic.window);
+            using rtype::GameEngine;
+            switch (graphic.gameEngine.scene) {
+                case GameEngine::INTRO: {
+                    int res = graphic.cinematic.drawOnWindow(graphic.window);
+                    if (res == 1)
+                        graphic.gameEngine.scene = GameEngine::WORLD;
+                    break;
+                }
+                case GameEngine::WORLD : {
+                    graphic.drawBackground();
+                    graphic.gameEngine.updateMainPosition(c.getPosition());
+                    graphic.playerBoard.setText(graphic.gameEngine.players);
+                    graphic.playerBoard.drawOnWindow(graphic.window);
+                    c.drawOnWindow(graphic.window);
+                    break;
+                }
+                default:
+                    break;
+            }
             graphic.window.display();
         }
         thread.join();

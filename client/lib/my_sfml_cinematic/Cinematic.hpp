@@ -16,13 +16,17 @@ class Cinematic {
     public:
         Cinematic();
 
-        void start();
+        int drawOnWindow(sf::RenderWindow &window);
 
     public:
         static const unsigned int FRAMES_COUNT = 218;
         std::array<sf::Sprite, FRAMES_COUNT> cinematicSprites;
 
-        const std::string GAMECUBE_SOUND = "assets/gamecube_intro.ogg";
+
+        sf::Clock clock;
+        sf::Music music;
+        const std::string GAMECUBE_SOUND = "client/lib/my_sfml_cinematic/assets/gamecube_intro.ogg";
+        const std::string CINEMATIC_SPRITES = "client/lib/my_sfml_cinematic/assets/f.png";
 };
 
 

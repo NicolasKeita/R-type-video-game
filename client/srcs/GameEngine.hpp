@@ -12,6 +12,7 @@
 #include <string>
 #include <SFML/Graphics.hpp>
 #include "Player.hpp"
+#include "Cinematic.hpp"
 
 namespace rtype {
     class GameEngine {

@@ -14,6 +14,7 @@
 #include "Background.hpp"
 #include "GameEngine.hpp"
 #include "PlayerBoard.hpp"
+#include "Cinematic.hpp"
 
 namespace rtype {
     class GraphicWrapper : public IGraphicWrapper {
@@ -25,8 +26,8 @@ namespace rtype {
 
         public:
             sf::RenderWindow    window;
+            Cinematic           cinematic;
             GameEngine          gameEngine;
-//            sf::Text            PlayerPos;
             PlayerBoard         playerBoard;
             bool                active;
         private:
