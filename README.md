@@ -14,7 +14,7 @@ Conan (to install Boost.asio) : https://conan.io
 
 Cmake version 3.12.4 minimun
 
-Package : openal-soft (linux only. Fedora : dnf install openal ; Ubuntu : apt-get -y build-dep libsfml)
+Package : openal-soft (linux only. Fedora : ```$ dnf install openal``` ; Ubuntu : ```$ apt-get -y build-dep libsfml```)
 
 ## Usage
 
@@ -24,7 +24,7 @@ Linux :
 
  ```$ ./r-type_server```
  
- ```$ ./r-type_client 0.0.0.0 42424``` (if the server doesn't run on your computer change 0.0.0.0 to the IP address of your server machine)
+ ```$ ./r-type_client 0.0.0.0 42424``` (if the server doesn't run on your computer, change 0.0.0.0 to the IP address of your server machine)
  
  TODO : put the server address in arg
  
