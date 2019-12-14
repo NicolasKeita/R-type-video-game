@@ -31,3 +31,14 @@ void rtype::GraphicWrapper::setBackground(const std::string & image1,
     _background.init_sprite(image1, image2);
 }
 
+void rtype::GraphicWrapper::loadAssets()
+{
+    this->setBackground("assets/background/space.jpg",
+                        "assets/background/deathstar.png");
+    characters.push_back(Character({"assets/character.png",
+                                    {40, 195, 100, 100},
+                                    127,
+                                    4,
+                                    CharacterGraphic::Direction::RIGHT},
+                                   {400, 400}));
+}

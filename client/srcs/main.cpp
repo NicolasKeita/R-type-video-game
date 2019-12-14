@@ -45,14 +45,7 @@ int main(int argc, char **argv, char **env)
         std::thread thread(&NetworkManager::handleProtocol, &network, std::ref(gameEngine));
 
         graphic.createWindows(1920, 1080);
-        graphic.setBackground("assets/background/space.jpg",
-                              "assets/background/deathstar.png");
-        graphic.characters.push_back(Character({"assets/character.png",
-                                                {40, 195, 100, 100},
-                                                127,
-                                                4,
-                                                CharacterGraphic::Direction::RIGHT},
-                                               {400, 400}));
+        graphic.loadAssets();
 
         while (graphic.window.isOpen()) {
             sf::Event event{};

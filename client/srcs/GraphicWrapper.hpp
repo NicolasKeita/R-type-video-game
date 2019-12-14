@@ -25,6 +25,7 @@ namespace rtype {
             void createWindows(size_t width, size_t height) override;
             void drawBackground() override;
             void setBackground(const std::string &image1, const std::string &image2) override;
+            void loadAssets();
 
         public:
             sf::RenderWindow        window;
