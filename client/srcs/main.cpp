@@ -16,10 +16,9 @@
 #include "MyProgArgs.hpp"
 
 
-int main(int argc, char **argv, char **env)
+NetworkManager createNetwork(const uti::MyProgArgs &args)
 {
-    uti::MyProgArgs args(argc, argv, env, 2);
-    int port;
+    int port = 0;
 
     try {
         port = std::stoi(args.getArgs().at(2));
@@ -29,12 +28,18 @@ int main(int argc, char **argv, char **env)
     }
     catch (std::invalid_argument &e) {
         std::cerr << "Wrong port\n" << e.what() << std::endl;
-        return 84;
+        exit(84);
     }
+    return NetworkManager(args.getArgs().at(1), port);
+}
 
+int main(int argc, char **argv, char **env)
+{
+    uti::MyProgArgs args(argc, argv, env, 2);
+
+    NetworkManager          network = createNetwork(args);
     rtype::GameEngine       gameEngine;
     rtype::GraphicWrapper   graphic;
-    NetworkManager network(args.getArgs().at(1), port);
 
     try {
         std::thread thread(&NetworkManager::handleProtocol, &network, std::ref(gameEngine));
@@ -42,22 +47,23 @@ int main(int argc, char **argv, char **env)
         graphic.createWindows(1920, 1080);
         graphic.setBackground("assets/background/space.jpg",
                               "assets/background/deathstar.png");
-
-        Character c({"assets/character.png",
-                     {40, 195, 100, 100},
-                     127,
-                     4,
-                     CharacterGraphic::Direction::RIGHT},
-                    {400, 400}); // TODO : put the character inside the graphic class (inside a list of characters)
+        graphic.characters.push_back(Character({"assets/character.png",
+                                                {40, 195, 100, 100},
+                                                127,
+                                                4,
+                                                CharacterGraphic::Direction::RIGHT},
+                                               {400, 400}));
 
         while (graphic.window.isOpen()) {
             sf::Event event{};
             while (graphic.window.pollEvent(event)) {
                 if (event.type == sf::Event::Closed || !graphic.active)
                     graphic.window.close();
-                c.activateKeyboardMvt(event);
+                for (auto &character : graphic.characters)
+                    character.activateKeyboardMvt(event);
             }
             graphic.window.clear();
+
             using rtype::GameEngine;
             switch (graphic.gameEngine.scene) {
                 case GameEngine::INTRO: {
@@ -68,10 +74,11 @@ int main(int argc, char **argv, char **env)
                 }
                 case GameEngine::WORLD : {
                     graphic.drawBackground();
-                    graphic.gameEngine.updateMainPosition(c.getPosition());
+                    graphic.gameEngine.updateMainPosition(graphic.characters.front().getPosition());
                     graphic.playerBoard.setText(graphic.gameEngine.players);
                     graphic.playerBoard.drawOnWindow(graphic.window);
-                    c.drawOnWindow(graphic.window);
+                    for (auto &character : graphic.characters)
+                        character.drawOnWindow(graphic.window);
                     break;
                 }
                 default:
@@ -83,7 +90,7 @@ int main(int argc, char **argv, char **env)
     }
     catch (std::exception &e) {
         std::cerr << "[R-Type Client] Exception: " << e.what() << std::endl;
-        return 2;
+        return 84;
     }
     return 0;
 }

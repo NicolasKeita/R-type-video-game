@@ -9,12 +9,14 @@
 #define GRAPHICWRAPPER_H_
 
 #include <iostream>
+#include <list>
 #include <SFML/Graphics.hpp>
 #include "IGraphicWrapper.hpp"
 #include "Background.hpp"
 #include "GameEngine.hpp"
 #include "PlayerBoard.hpp"
 #include "Cinematic.hpp"
+#include "Character.hpp"
 
 namespace rtype {
     class GraphicWrapper : public IGraphicWrapper {
@@ -25,11 +27,12 @@ namespace rtype {
             void setBackground(const std::string &image1, const std::string &image2) override;
 
         public:
-            sf::RenderWindow    window;
-            Cinematic           cinematic;
-            GameEngine          gameEngine;
-            PlayerBoard         playerBoard;
-            bool                active;
+            sf::RenderWindow        window;
+            Cinematic               cinematic;
+            GameEngine              gameEngine;
+            PlayerBoard             playerBoard;
+            bool                    active;
+            std::list<Character>    characters;
         private:
             Background       _background;
     };
