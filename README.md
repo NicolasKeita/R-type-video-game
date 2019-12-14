@@ -14,6 +14,8 @@ Conan (to install Boost.asio) : https://conan.io
 
 Cmake version 3.12.4 minimun
 
+LibOpenAL (linux only)
+
 ## Usage
 
 Linux :
@@ -22,7 +24,7 @@ Linux :
 
  ```$ ./r-type_server```
  
- ```$ ./r-type_client```
+ ```$ ./r-type_client 0.0.0.0 42424``` (if the server doesn't run on your computer change 0.0.0.0 to the IP address of your server machine)
  
  TODO : put the server address in arg
  
