@@ -24,7 +24,9 @@ Linux :
 
  2) ```$ ./r-type_server``` (to start the server)
  
- 3) ```$ ./r-type_client 0.0.0.0 42424``` (if the server doesn't run on your computer, change 0.0.0.0 to the IP address of your server machine)
+ 3) ```$ ./r-type_client 0.0.0.0 42424``` (to start the game)
+ 
+ (You can run the server and game on different machines. If you do so, change 0.0.0.0 to the IP address of your server machine)
  
 
 Windows :
