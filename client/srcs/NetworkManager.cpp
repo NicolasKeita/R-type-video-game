@@ -20,11 +20,11 @@ void NetworkManager::handleProtocol(rtype::GameEngine &gameEngine)
         // send a message every 1000 milliseconds
         if (_clock.getElapsedTime().asMilliseconds() > 1000) {
             const std::string msg = protocolDecideWhichMessageToSend(gameEngine);
-            _udp.sendMessage(msg);
-            _clock.restart();
-
             std::string reply;
             try {
+                _udp.sendMessage(msg);
+                _clock.restart();
+
                 // Blocking function
                 reply = _udp.getReply();
             } catch (const boost::system::system_error &e) { // correct shutdown of the network

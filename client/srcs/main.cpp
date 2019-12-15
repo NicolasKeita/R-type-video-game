@@ -31,7 +31,7 @@ NetworkManager createNetwork(const uti::MyProgArgs &args)
 
 int main(int argc, char **argv, char **env)
 {
-    uti::MyProgArgs args(argc, argv, env, 2);
+    uti::MyProgArgs         args(argc, argv, env, 2);
 
     rtype::GameEngine       gameEngine;
     rtype::GraphicWrapper   graphic;
