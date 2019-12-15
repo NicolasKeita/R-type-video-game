@@ -63,17 +63,16 @@ int main(int argc, char **argv, char **env)
             graphic.window.clear();
 
             using rtype::GameEngine;
-            switch (graphic.gameEngine.scene) {
+            switch (gameEngine.scene) {
                 case GameEngine::INTRO: {
                     int res = graphic.cinematic.drawOnWindow(graphic.window);
                     if (res == 1)
-                        graphic.gameEngine.scene = GameEngine::WORLD;
+                        gameEngine.scene = GameEngine::WORLD;
                     break;
                 }
                 case GameEngine::WORLD : {
                     graphic.drawBackground();
-                    graphic.gameEngine.updateMainPosition(graphic.characters.front().getPosition());
-                    graphic.playerBoard.setText(graphic.gameEngine.players);
+                    gameEngine.updateMainPosition(graphic.characters.front().getPosition());
                     graphic.playerBoard.drawOnWindow(graphic.window);
                     for (auto &character : graphic.characters)
                         character.drawOnWindow(graphic.window);

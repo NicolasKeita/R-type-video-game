@@ -6,6 +6,7 @@
 */
 
 #include <vector>
+#include <iostream>
 #include "GameEngine.hpp"
 #include "MyStrTok.hpp"
 

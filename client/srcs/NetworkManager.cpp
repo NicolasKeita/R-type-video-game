@@ -49,6 +49,7 @@ std::string NetworkManager::protocolDecideWhichMessageToSend(const rtype::GameEn
               std::to_string(gameEngine.players.front().ID) +
               "  " + std::to_string(gameEngine.players.front().posY) +
               "  " + std::to_string(gameEngine.players.front().posX);
+        std::cout << "msg :"  << msg << std::endl;
     }
     return msg;
 }

@@ -29,7 +29,10 @@ void rtype::PlayerBoard::setText(const std::list<Player> &players)
     } else {
         int posYOnScreen = 0;
         for (auto &player : players) {
-            _setTextOneArea(std::to_string(player.ID), player.posX, player.posY, posYOnScreen);
+            _setTextOneArea(std::to_string(player.ID),
+                            player.posX,
+                            player.posY,
+                            posYOnScreen);
             posYOnScreen += 80;
         }
     }

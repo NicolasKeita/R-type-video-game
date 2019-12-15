@@ -30,7 +30,6 @@ namespace rtype {
         public:
             sf::RenderWindow        window;
             Cinematic               cinematic;
-            GameEngine              gameEngine;
             PlayerBoard             playerBoard;
             bool                    active;
             std::list<Character>    characters;
