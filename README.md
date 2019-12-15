@@ -26,7 +26,7 @@ Linux :
  
  3) ```$ ./r-type_client 0.0.0.0 42424``` (to start the game)
  
- (You can run the server and game on different machines. If you do so, change 0.0.0.0 to the IP address of your server machine)
+ (You can run the server and the game on different machines. If you do so, change 0.0.0.0 to the IP address of your server machine)
  
 
 Windows :
