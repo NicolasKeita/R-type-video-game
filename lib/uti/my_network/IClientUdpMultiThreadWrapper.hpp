@@ -14,6 +14,7 @@ namespace uti::network {
             virtual void setServer(const std::string &serverAddress, size_t port) = 0;
             virtual void sendMessage(const std::string &message) = 0;
             virtual std::string getReply() = 0;
+            virtual void stop() = 0;
     };
 }
 

@@ -22,10 +22,11 @@ void NetworkManager::handleProtocol(rtype::GameEngine &gameEngine)
                 _udp.sendMessage("IDREQUEST");
             else {
                 _udp.sendMessage("POS " +
-                                        std::to_string(gameEngine.players.front().ID) +
-                                        "  " + std::to_string(gameEngine.players.front().posY) +
-                                        "  " + std::to_string(gameEngine.players.front().posX));
-                }
+                                 std::to_string(gameEngine.players.front().ID) +
+                                 "  " + std::to_string(gameEngine.players.front().posY) +
+                                 "  " + std::to_string(gameEngine.players.front().posX));
+            }
+            // Blocking
             std::string reply = _udp.getReply();
             if (boost::starts_with(reply, "ID")) {
                 int idValue = std::stoi(reply.substr(2));
@@ -42,8 +43,16 @@ void NetworkManager::handleProtocol(rtype::GameEngine &gameEngine)
                 break;
             }
             //std::cout << "[debug client] server msg : DEBUT" << reply << "FIN" << std::endl;
-            } catch (std::invalid_argument &e) {
-                std::cerr << "[Rtype client] wrong arg to stoi" << std::endl;
-            }
+        } catch (std::invalid_argument &e) {
+            std::cerr << "[Rtype client] wrong arg to stoi" << std::endl;
+            return;
+        } catch (const boost::system::system_error &e) {
+            return; // correct shutdown of the network
         }
+    }
+}
+
+void NetworkManager::stop()
+{
+    _udp.stop();
 }

@@ -6,7 +6,6 @@ dist: bionic
 compiler:
   - gcc
 
-#name: Style, docs, and pip
 cache: false
 before_install:
   - pyenv global $(pyenv whence 2to3)

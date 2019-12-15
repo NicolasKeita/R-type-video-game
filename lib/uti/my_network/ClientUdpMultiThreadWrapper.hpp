@@ -23,6 +23,7 @@ namespace uti::network {
             void setServer(const std::string &serverAddress, size_t port) override;
             void sendMessage(const std::string &message) override;
             std::string getReply();
+            void stop();
 
         private:
             boost::asio::io_context                         _io_context;

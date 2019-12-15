@@ -6,15 +6,11 @@
 */
 
 #include <thread>
-#include <boost/algorithm/string/predicate.hpp>
 #include "GraphicWrapper.hpp"
 #include "Character.hpp"
-#include "ClientUdpMultiThreadWrapper.hpp"
-#include "Player.hpp"
 #include "NetworkManager.hpp"
 #include "GameEngine.hpp"
 #include "MyProgArgs.hpp"
-
 
 NetworkManager createNetwork(const uti::MyProgArgs &args)
 {
@@ -41,17 +37,21 @@ int main(int argc, char **argv, char **env)
     rtype::GameEngine       gameEngine;
     rtype::GraphicWrapper   graphic;
 
-    try {
-        std::thread thread(&NetworkManager::handleProtocol, &network, std::ref(gameEngine));
-
-        graphic.createWindows(1920, 1080);
+    std::thread thread(&NetworkManager::handleProtocol, &network, std::ref(gameEngine));
+    try
+    {
+        graphic.createWindows(1000, 1080);
         graphic.loadAssets();
 
         while (graphic.window.isOpen()) {
             sf::Event event{};
             while (graphic.window.pollEvent(event)) {
-                if (event.type == sf::Event::Closed || !graphic.active)
+                if (event.type == sf::Event::Closed || !graphic.active) {
+                    gameEngine.scene = rtype::GameEngine::END;
+                    network.stop();
                     graphic.window.close();
+                    break;
+                }
                 for (auto &character : graphic.characters)
                     character.activateKeyboardMvt(event);
             }
@@ -79,11 +79,14 @@ int main(int argc, char **argv, char **env)
             }
             graphic.window.display();
         }
-        thread.join();
-    }
-    catch (std::exception &e) {
+    } catch (const boost::system::system_error &e) {
+        thread.join(); // correct shutdown of the network
+    } catch (std::exception &e) {
         std::cerr << "[R-Type Client] Exception: " << e.what() << std::endl;
+        thread.join();
         return 84;
     }
+    if (thread.joinable())
+        thread.join();
     return 0;
 }

@@ -53,3 +53,9 @@ std::string uti::network::ClientUdpMultiThreadWrapper::getReply()
     //sender_endpoint is now equal to the server
     return std::string(reply, reply_length);
 }
+
+void uti::network::ClientUdpMultiThreadWrapper::stop()
+{
+    _socket.shutdown(boost::asio::ip::udp::socket::shutdown_both);
+//    this->_socket.close();
+}

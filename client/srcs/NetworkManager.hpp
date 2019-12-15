@@ -17,6 +17,7 @@ class NetworkManager {
         NetworkManager(const std::string & addressServer, unsigned int port);
 
         void handleProtocol(rtype::GameEngine &gameEngine);
+        void stop();
 
     private:
         uti::network::ClientUdpMultiThreadWrapper _udp;
