@@ -17,39 +17,59 @@ NetworkManager::NetworkManager(const std::string &addressServer,
 void NetworkManager::handleProtocol(rtype::GameEngine &gameEngine)
 {
     while (true) {
-        try {
-            if (gameEngine.players.empty())
-                _udp.sendMessage("IDREQUEST");
-            else {
-                _udp.sendMessage("POS " +
-                                 std::to_string(gameEngine.players.front().ID) +
-                                 "  " + std::to_string(gameEngine.players.front().posY) +
-                                 "  " + std::to_string(gameEngine.players.front().posX));
+        // send a message every 1000 milliseconds
+        if (_clock.getElapsedTime().asMilliseconds() > 1000) {
+            const std::string msg = protocolDecideWhichMessageToSend(gameEngine);
+            _udp.sendMessage(msg);
+            _clock.restart();
+
+            std::string reply;
+            try {
+                // Blocking function
+                reply = _udp.getReply();
+            } catch (const boost::system::system_error &e) { // correct shutdown of the network
+                return;
             }
-            // Blocking
-            std::string reply = _udp.getReply();
-            if (boost::starts_with(reply, "ID")) {
-                int idValue = std::stoi(reply.substr(2));
-                gameEngine.players.push_front(rtype::Player(idValue));
-            }
-            if (boost::starts_with(reply, "POS")) {
-                std::cerr << "MessageReceivedDEBUT" << reply << "FIN" << std::endl;
-                gameEngine.saveAllPositions(reply);
+            int stopProgram = protocolHandleReceivedMessages(reply, gameEngine);
+            if (stopProgram)
+                return;
+        }
+        //std::cout << "[debug client] server msg : DEBUT" << reply << "FIN" << std::endl;
+    }
+}
+
+std::string NetworkManager::protocolDecideWhichMessageToSend(const rtype::GameEngine &gameEngine)
+{
+    std::string msg;
+
+    if (gameEngine.players.empty())
+        msg = "IDREQUEST";
+    else {
+        msg = "POS " +
+              std::to_string(gameEngine.players.front().ID) +
+              "  " + std::to_string(gameEngine.players.front().posY) +
+              "  " + std::to_string(gameEngine.players.front().posX);
+    }
+    return msg;
+}
+
+int NetworkManager::protocolHandleReceivedMessages(const std::string &reply, rtype::GameEngine &gameEngine)
+{
+    if (boost::starts_with(reply, "ID")) {
+        int idValue = std::stoi(reply.substr(2));
+        gameEngine.players.push_front(rtype::Player(idValue));
+    }
+    if (boost::starts_with(reply, "POS")) {
+        std::cerr << "MessageReceivedDEBUT" << reply << "FIN" << std::endl;
+        gameEngine.saveAllPositions(reply);
 //                gameEngine.firstDataReceived = true;
 //                graphic.playerBoard.firstDataReceived = true;
-            }
-            if (boost::starts_with(reply, "TERMINATE")) {
-                gameEngine.scene = rtype::GameEngine::END;
-                break;
-            }
-            //std::cout << "[debug client] server msg : DEBUT" << reply << "FIN" << std::endl;
-        } catch (std::invalid_argument &e) {
-            std::cerr << "[Rtype client] wrong arg to stoi" << std::endl;
-            return;
-        } catch (const boost::system::system_error &e) {
-            return; // correct shutdown of the network
-        }
     }
+    if (boost::starts_with(reply, "TERMINATE")) {
+        gameEngine.scene = rtype::GameEngine::END;
+        return 1;
+    }
+    return 0;
 }
 
 void NetworkManager::stop()

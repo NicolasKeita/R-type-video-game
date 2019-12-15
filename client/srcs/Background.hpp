@@ -22,19 +22,19 @@ class Background {
 
         //TODO: turn everything else to private
         void move_background();
-        sf::Time t1 = sf::seconds(0.01f);
-        sf::Clock clock;
-        float sec = t1.asSeconds();
-        float sec2 = t1.asSeconds();
-        float a = 0.f;
-        float b = 1500.f;
-        float c = -500.f;
+        sf::Time    t1 = sf::seconds(0.01f);
+        sf::Clock   clock;
+        float       sec = t1.asSeconds();
+        float       sec2 = t1.asSeconds();
+        float       a = 0.f;
+        float       b = 1500.f;
+        float       c = -500.f;
         sf::Texture texture_bg1;
         sf::Texture texture_bg2;
         sf::Texture texture_deathstar;
-        sf::Sprite sprite_bg1;
-        sf::Sprite sprite_bg2;
-        sf::Sprite sprite_deathstar;
+        sf::Sprite  sprite_bg1;
+        sf::Sprite  sprite_bg2;
+        sf::Sprite  sprite_deathstar;
 
     private:
         sf::RenderWindow & _window;

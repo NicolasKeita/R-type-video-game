@@ -33,14 +33,19 @@ int main(int argc, char **argv, char **env)
 {
     uti::MyProgArgs args(argc, argv, env, 2);
 
-    NetworkManager          network = createNetwork(args);
     rtype::GameEngine       gameEngine;
     rtype::GraphicWrapper   graphic;
 
-    std::thread thread(&NetworkManager::handleProtocol, &network, std::ref(gameEngine));
+    // Network in another thread
+    NetworkManager          network = createNetwork(args);
+    std::thread             thread(&NetworkManager::handleProtocol,
+                                   &network,
+                                   std::ref(gameEngine));
+
     try
     {
-        graphic.createWindows(1000, 1080);
+        graphic.createWindows(1920, 1080);
+        //graphic.window.setVisible(false); // TODO remove
         graphic.loadAssets();
 
         while (graphic.window.isOpen()) {
@@ -79,8 +84,8 @@ int main(int argc, char **argv, char **env)
             }
             graphic.window.display();
         }
-    } catch (const boost::system::system_error &e) {
-        thread.join(); // correct shutdown of the network
+    } catch (const boost::system::system_error &e) { // correct shutdown of the network
+        thread.join();
     } catch (std::exception &e) {
         std::cerr << "[R-Type Client] Exception: " << e.what() << std::endl;
         thread.join();
