@@ -73,6 +73,7 @@ int main(int argc, char **argv, char **env)
                 case GameEngine::WORLD : {
                     graphic.drawBackground();
                     gameEngine.updateMainPosition(graphic.characters.front().getPosition());
+                    graphic.playerBoard.setText(gameEngine.players);
                     graphic.playerBoard.drawOnWindow(graphic.window);
                     for (auto &character : graphic.characters)
                         character.drawOnWindow(graphic.window);

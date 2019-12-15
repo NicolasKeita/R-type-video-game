@@ -43,22 +43,23 @@ void rtype::PlayerBoard::_setTextOneArea(const std::string &PlayerName,
                                           float playerY,
                                           int posYOnScreen)
 {
-    //auto createText = [&]()
-    std::string text;
-    std::string old_x;
-    std::string old_y;
-    std::stringstream new_x;
-    std::stringstream new_y;
+    auto createText = [&]()
+    {
+        std::string old_x;
+        std::string old_y;
+        std::stringstream new_x;
+        std::stringstream new_y;
 
-    new_x << playerX;
-    old_x = new_x.str();
-    new_y << playerY;
-    old_y = new_y.str();
-    text = "PlayerID: " + PlayerName + " ; x:" + old_x + "; y:" + old_y;
+        new_x << playerX;
+        old_x = new_x.str();
+        new_y << playerY;
+        old_y = new_y.str();
+        return "PlayerID: " + PlayerName + " ; x:" + old_x + "; y:" + old_y;
+    };
 
+    std::string text = createText();
     sf::Text textArea;
-//    auto font = std::make_unique<sf::Font>();
-    auto font = new sf::Font();
+    auto font = new sf::Font(); // TODO remove this new
     font->loadFromFile("assets/arial.ttf");
     textArea.setFont(*font);
     textArea.setString(text);
