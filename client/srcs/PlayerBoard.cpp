@@ -13,35 +13,43 @@
 
 rtype::PlayerBoard::PlayerBoard()
         :   firstDataReceived { false }
-{}
+{
+    font.loadFromFile("assets/arial.ttf");
+    _setTextOneArea(textNoServerDetected, "No server detected", -1, -1, 0);
+}
 
 void rtype::PlayerBoard::drawOnWindow(sf::RenderWindow & window)
 {
-    for (auto &text : textAreas) {
-        window.draw(text);
+    if (textAreas.empty())
+        window.draw(textNoServerDetected);
+    else {
+        for (auto &text : textAreas) {
+            window.draw(text);
+        }
     }
 }
 
 void rtype::PlayerBoard::setText(const std::list<Player> &players)
 {
-    if (players.empty()) {
-        _setTextOneArea("No server detected", -1, -1, 0);
-    } else {
+    if (!players.empty()) {
+        /*
         int posYOnScreen = 0;
         for (auto &player : players) {
-            _setTextOneArea(std::to_string(player.ID),
+            _setTextOneArea(
+                    std::to_string(player.ID),
                             player.posX,
                             player.posY,
                             posYOnScreen);
             posYOnScreen += 80;
-        }
+        }*/
     }
 }
 
-void rtype::PlayerBoard::_setTextOneArea(const std::string &PlayerName,
-                                          float playerX,
-                                          float playerY,
-                                          int posYOnScreen)
+void rtype::PlayerBoard::_setTextOneArea(sf::Text &textGraphic,
+                                         const std::string &PlayerName,
+                                         float playerX,
+                                         float playerY,
+                                         int posYOnScreen)
 {
     auto createText = [&]()
     {
@@ -56,15 +64,24 @@ void rtype::PlayerBoard::_setTextOneArea(const std::string &PlayerName,
         old_y = new_y.str();
         return "PlayerID: " + PlayerName + " ; x:" + old_x + "; y:" + old_y;
     };
+    auto createTextGraphic = [&]()
+    {
+        std::string text = createText();
+        sf::Text textArea;
+        textArea.setFont(font);
+        textArea.setString(text);
+        textArea.setPosition(1500, static_cast<float>(posYOnScreen));
+        return textArea;
+    };
 
-    std::string text = createText();
-    sf::Text textArea;
-    auto font = new sf::Font(); // TODO remove this new
-    font->loadFromFile("assets/arial.ttf");
-    textArea.setFont(*font);
-    textArea.setString(text);
-    textArea.setPosition(1500, static_cast<float>(posYOnScreen));
+    if (textGraphic.getFont() == nullptr) {
+        textGraphic = createTextGraphic();
+    } else {
+        std::string text = createText();
+        textGraphic.setString(text);
+    }
 
+    /*
     static bool once = true;
     if (firstDataReceived && once) {
         textAreas.clear();
@@ -83,5 +100,5 @@ void rtype::PlayerBoard::_setTextOneArea(const std::string &PlayerName,
             }
         }
         textAreas.push_back(textArea);
-    }
+    }*/
 }

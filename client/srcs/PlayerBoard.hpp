@@ -21,13 +21,16 @@ namespace rtype {
             void drawOnWindow(sf::RenderWindow &window);
 
             std::list<sf::Text> textAreas;
+            sf::Text            textNoServerDetected;
             bool                firstDataReceived;
+            sf::Font            font;
 
         private:
-            void _setTextOneArea(const std::string &PlayerName,
-                                  float playerX,
-                                  float playerY,
-                                  int posYOnScreen);
+            void _setTextOneArea(sf::Text &textGraphic,
+                                 const std::string &PlayerName,
+                                 float playerX,
+                                 float playerY,
+                                 int posYOnScreen);
     };
 }
 
