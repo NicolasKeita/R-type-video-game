@@ -5,10 +5,8 @@
 **
 */
 
-#include <memory>
 #include <string>
 #include <sstream>
-#include <boost/algorithm/string/predicate.hpp>
 #include "PlayerBoard.hpp"
 
 rtype::PlayerBoard::PlayerBoard()
@@ -31,28 +29,14 @@ void rtype::PlayerBoard::drawOnWindow(sf::RenderWindow & window)
 
 void rtype::PlayerBoard::setText(const std::list<Player> &players)
 {
+    int posYOnScreen = 0;
     for (auto &player : players) {
-        int posYOnScreen = 0;
-        if (mapTextAreas.find(player) == mapTextAreas.end()) {
-            _setTextOneArea(mapTextAreas[player],
-                            std::to_string(player.ID),
-                            player.posX,
-                            player.posY,
-                            posYOnScreen);
-        }
+        _setTextOneArea(mapTextAreas[player],
+                        std::to_string(player.ID),
+                        player.posX,
+                        player.posY,
+                        posYOnScreen);
         posYOnScreen += 80;
-    }
-    if (!players.empty()) {
-        /*
-        int posYOnScreen = 0;
-        for (auto &player : players) {
-            _setTextOneArea(
-                    std::to_string(player.ID),
-                            player.posX,
-                            player.posY,
-                            posYOnScreen);
-            posYOnScreen += 80;
-        }*/
     }
 }
 
@@ -64,10 +48,10 @@ void rtype::PlayerBoard::_setTextOneArea(sf::Text &textGraphic,
 {
     auto createText = [&]()
     {
-        std::string old_x;
-        std::string old_y;
-        std::stringstream new_x;
-        std::stringstream new_y;
+        std::string         old_x;
+        std::string         old_y;
+        std::stringstream   new_x;
+        std::stringstream   new_y;
 
         new_x << playerX;
         old_x = new_x.str();
@@ -90,26 +74,6 @@ void rtype::PlayerBoard::_setTextOneArea(sf::Text &textGraphic,
     } else {
         std::string text = createText();
         textGraphic.setString(text);
+        textGraphic.setPosition(1500, static_cast<float>(posYOnScreen));
     }
-
-    /*
-    static bool once = true;
-    if (firstDataReceived && once) {
-        textAreas.clear();
-        once = false;
-    }
-    if (textAreas.empty()) {
-        textAreas.push_back(textArea);
-        return;
-    }
-    else {
-        for (auto &infoPlayer : textAreas) {
-            if (boost::starts_with(infoPlayer.getString().toUtf16(),
-                                   "PlayerID: " + PlayerName)) {
-                infoPlayer = textArea;
-                return;
-            }
-        }
-        textAreas.push_back(textArea);
-    }*/
 }
