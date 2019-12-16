@@ -18,7 +18,7 @@ void NetworkManager::handleProtocol(rtype::GameEngine &gameEngine)
 {
     while (true) {
         // send a message every 1000 milliseconds
-        if (_clock.getElapsedTime().asMilliseconds() > 1000) {
+        if (_clock.getElapsedTime().asMilliseconds() > 100) {
             const std::string msg = protocolDecideWhichMessageToSend(gameEngine);
             std::string reply;
             try {
@@ -49,7 +49,6 @@ std::string NetworkManager::protocolDecideWhichMessageToSend(const rtype::GameEn
               std::to_string(gameEngine.players.front().ID) +
               "  " + std::to_string(gameEngine.players.front().posY) +
               "  " + std::to_string(gameEngine.players.front().posX);
-        std::cout << "msg :"  << msg << std::endl;
     }
     return msg;
 }
@@ -63,8 +62,6 @@ int NetworkManager::protocolHandleReceivedMessages(const std::string &reply, rty
     if (boost::starts_with(reply, "POS")) {
         std::cerr << "MessageReceivedDEBUT" << reply << "FIN" << std::endl;
         gameEngine.saveAllPositions(reply);
-//                gameEngine.firstDataReceived = true;
-//                graphic.playerBoard.firstDataReceived = true;
     }
     if (boost::starts_with(reply, "TERMINATE")) {
         gameEngine.scene = rtype::GameEngine::END;

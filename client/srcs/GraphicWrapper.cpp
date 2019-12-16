@@ -6,7 +6,6 @@
 */
 
 #include <iostream>
-#include <sstream>
 #include "GraphicWrapper.hpp"
 
 rtype::GraphicWrapper::GraphicWrapper()
