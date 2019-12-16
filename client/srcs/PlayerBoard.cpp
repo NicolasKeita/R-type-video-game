@@ -20,17 +20,28 @@ rtype::PlayerBoard::PlayerBoard()
 
 void rtype::PlayerBoard::drawOnWindow(sf::RenderWindow & window)
 {
-    if (textAreas.empty())
+    if (mapTextAreas.empty())
         window.draw(textNoServerDetected);
     else {
-        for (auto &text : textAreas) {
-            window.draw(text);
+        for (auto &text : mapTextAreas) {
+            window.draw(text.second);
         }
     }
 }
 
 void rtype::PlayerBoard::setText(const std::list<Player> &players)
 {
+    for (auto &player : players) {
+        int posYOnScreen = 0;
+        if (mapTextAreas.find(player) == mapTextAreas.end()) {
+            _setTextOneArea(mapTextAreas[player],
+                            std::to_string(player.ID),
+                            player.posX,
+                            player.posY,
+                            posYOnScreen);
+        }
+        posYOnScreen += 80;
+    }
     if (!players.empty()) {
         /*
         int posYOnScreen = 0;

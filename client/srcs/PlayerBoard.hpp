@@ -20,10 +20,10 @@ namespace rtype {
             void setText(const std::list<Player> &players);
             void drawOnWindow(sf::RenderWindow &window);
 
-            std::list<sf::Text> textAreas;
-            sf::Text            textNoServerDetected;
-            bool                firstDataReceived;
-            sf::Font            font;
+            std::map<Player, sf::Text>  mapTextAreas;
+            sf::Text    textNoServerDetected;
+            bool        firstDataReceived;
+            sf::Font    font;
 
         private:
             void _setTextOneArea(sf::Text &textGraphic,
