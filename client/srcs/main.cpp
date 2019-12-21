@@ -8,6 +8,7 @@
 #include <thread>
 #include "GraphicWrapper.hpp"
 #include "Character.hpp"
+#include "Player.hpp"
 #include "NetworkManager.hpp"
 #include "GameEngine.hpp"
 #include "MyProgArgs.hpp"
@@ -57,8 +58,7 @@ int main(int argc, char **argv, char **env)
                     graphic.window.close();
                     break;
                 }
-                for (auto &character : graphic.characters)
-                    character.second.activateKeyboardMvt(event);
+                graphic.characters.begin()->second.activateKeyboardMvt(event);
             }
             graphic.window.clear();
 
