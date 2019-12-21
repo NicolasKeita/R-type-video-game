@@ -47,7 +47,7 @@ void rtype::GameEngine::_savePosition(const std::string &info)
     }
 }
 
-void rtype::GameEngine::updateMainCharacterPosition(const std::unordered_map<typename rtype::Player, Character> &characters)
+void rtype::GameEngine::updateMainCharacterPosition(const std::unordered_map<Player, Character> &characters)
 {
     if (!players.empty()) {
         for (auto &player : players) {
