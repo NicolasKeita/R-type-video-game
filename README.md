@@ -14,7 +14,7 @@ Conan (to install Boost.asio) : https://conan.io
 
 Cmake version 3.12.4 minimun
 
-Package : openal, g++ (linux only. Fedora : ```$ dnf install openal g++``` ; Ubuntu : ```$ apt-get install -y libopenal-dev libalut-dev && apt-get -y build-dep libsfml```)
+Package : openal, g++ libtool (linux only. Fedora : ```$ dnf install openal g++ libtool``` ; Ubuntu : ```$ apt-get install -y libopenal-dev libalut-dev && apt-get -y build-dep libsfml```)
 
 ## Usage
 
