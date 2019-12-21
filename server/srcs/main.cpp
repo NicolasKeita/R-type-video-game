@@ -9,13 +9,13 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include "ServerUdpMultiThreadWrapper.hpp"
 #include "GameInfo.hpp"
+#include "MyProgArgs.hpp"
 
 std::string handleMessageReceived(const std::string &messageReceived)
 {
-    std::cerr << "[debug]Message receive: DEBUT" << messageReceived << "FIN" << std::endl;
-
     static int i = 1;
     static rtype::GameInfo gameInfo;
+
     try {
         if (boost::starts_with(messageReceived, "IDREQUEST")) {
             return "ID " + std::to_string(i++);
@@ -23,6 +23,9 @@ std::string handleMessageReceived(const std::string &messageReceived)
         if (boost::starts_with(messageReceived, "POS ")) {
             gameInfo.savePosition(messageReceived);
             return gameInfo.allPositionInOneString();
+        }
+        if (boost::starts_with(messageReceived, "TERMINATE")) {
+            exit(84);
         }
     } catch (std::invalid_argument &e) {
         std::cerr << "[Rtype server] wrong arg to stoi" << std::endl;
@@ -32,9 +35,7 @@ std::string handleMessageReceived(const std::string &messageReceived)
 
 int main(int argc, char **argv, char **env)
 {
-    (void)argc;
-    (void)argv;
-    (void)env;
+    uti::MyProgArgs         args(argc, argv, env, 1);
 
     try
     {

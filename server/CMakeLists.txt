@@ -10,16 +10,15 @@ add_executable(r-type_server
 
 target_include_directories(r-type_server PUBLIC
         ./srcs/
+        ../lib/uti/my_prog_args/
         lib/uti/my_network/
         lib/uti/my_string/)
 
-#add_subdirectory("${CMAKE_HOME_DIRECTORY}/lib/uti/my_network" build)
-#target_link_directories(r-type_client PRIVATE ${SFML_LIB_DIR}/lib)
 target_link_libraries(r-type_server PRIVATE
         my_network
         ${CONAN_LIBS})
 
-target_compile_options(r-type_server PRIVATE -Wall -Wextra -g3)
+target_compile_options(r-type_server PRIVATE -Wall -Wextra)
 
 add_custom_command(TARGET r-type_server
                    POST_BUILD

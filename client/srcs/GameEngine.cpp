@@ -6,18 +6,15 @@
 */
 
 #include <vector>
-#include <iostream>
+#include <unordered_map>
 #include "GameEngine.hpp"
 #include "MyStrTok.hpp"
 
 rtype::GameEngine::GameEngine() : scene { WORLD }, mainPlayerID { -2 }
-{
-
-}
+{}
 
 void rtype::GameEngine::saveAllPositions(const std::string & positionsProtocol)
 {
-    //const std::string &         str = positionsProtocol;
     std::vector<std::string>    playerInfos;
 
     uti::myStrTok(positionsProtocol, playerInfos, ";");
@@ -49,7 +46,7 @@ void rtype::GameEngine::_savePosition(const std::string &info)
     }
 }
 
-void rtype::GameEngine::updateMainCharacterPosition(const std::unordered_map<Player, Character> &characters)
+void rtype::GameEngine::updateMainCharacterPosition(const std::unordered_map<typename rtype::Player, Character> &characters)
 {
     if (!players.empty()) {
         for (auto &player : players) {

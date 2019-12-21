@@ -40,7 +40,6 @@ void NetworkManager::handleProtocol(rtype::GameEngine &gameEngine)
             if (stopProgram)
                 return;
         }
-        //std::cout << "[debug client] server msg : DEBUT" << reply << "FIN" << std::endl;
     }
 }
 
@@ -73,7 +72,6 @@ int NetworkManager::protocolHandleReceivedMessages(const std::string &reply, rty
         gameEngine.mainPlayerID = idValue;
     }
     else if (boost::starts_with(reply, "POS")) {
-        std::cerr << "MessageReceivedDEBUT" << reply << "FIN" << std::endl;
         gameEngine.saveAllPositions(reply);
     }
     else if (boost::starts_with(reply, "TERMINATE")) {

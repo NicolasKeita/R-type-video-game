@@ -9,11 +9,11 @@
 #include <iostream>
 #include "Background.hpp"
 
-Background::Background(sf::RenderWindow & window)
+rtype::Background::Background(sf::RenderWindow & window)
         : _window { window }
 {}
 
-void Background::init_sprite(const std::string &image1,
+void rtype::Background::init_sprite(const std::string &image1,
                              const std::string &image2)
 {
     texture_bg1.loadFromFile(image1);
@@ -25,7 +25,7 @@ void Background::init_sprite(const std::string &image1,
     sprite_bg2.setPosition(5000, 4000);
 }
 
-void Background::move_background()
+void rtype::Background::move_background()
 {
     sf::Time elapsed1 = clock.getElapsedTime();
     sec = elapsed1.asSeconds();
@@ -46,7 +46,7 @@ void Background::move_background()
     }
 }
 
-void Background::drawAndMoveBackground()
+void rtype::Background::drawAndMoveBackground()
 {
     _window.draw(sprite_bg1);
     _window.draw(sprite_bg2);
