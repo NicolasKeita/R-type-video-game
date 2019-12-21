@@ -126,6 +126,18 @@ void Character::move(const sf::Vector2f & offset)
     _posOnScreen.y = rect.top;
 }
 
+void Character::setPosition(const sf::Vector2f &pos)
+{
+    for (auto & spritesDirection : _sprites) {
+        for (auto & sprite : spritesDirection) {
+            sprite.setPosition(pos);
+        }
+    }
+    sf::FloatRect rect = _sprites.at(0).at(0).getGlobalBounds();
+    _posOnScreen.x = rect.left;
+    _posOnScreen.y = rect.top;
+}
+
 sf::Vector2f Character::getPosition() const
 {
     return _posOnScreen;
@@ -147,15 +159,6 @@ void Character::setDistancePerMove(float distancePerMove)
 void Character::setBoundariesMvt(const sf::FloatRect &rect)
 {
     _boundariesMvt = rect;
-}
-
-void Character::setPosition(const sf::Vector2f &pos)
-{
-    for (auto & spritesDirection : _sprites) {
-        for (auto &sprite : spritesDirection) {
-            sprite.setPosition(pos);
-        }
-    }
 }
 
 void Character::setScale(float scale)

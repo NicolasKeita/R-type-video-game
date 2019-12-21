@@ -10,17 +10,18 @@
 #include "GameEngine.hpp"
 #include "MyStrTok.hpp"
 
-rtype::GameEngine::GameEngine() : scene { WORLD }
+rtype::GameEngine::GameEngine() : scene { WORLD }, mainPlayerID { -2 }
 {
 
 }
 
 void rtype::GameEngine::saveAllPositions(const std::string & positionsProtocol)
 {
-    const std::string& str = positionsProtocol;
-    std::vector<std::string> playerInfos;
-    uti::myStrTok(str, playerInfos, ";");
-    for (std::string &playerInfo : playerInfos)
+    //const std::string &         str = positionsProtocol;
+    std::vector<std::string>    playerInfos;
+
+    uti::myStrTok(positionsProtocol, playerInfos, ";");
+    for (const std::string &playerInfo : playerInfos)
         _savePosition(playerInfo);
 }
 
@@ -48,25 +49,20 @@ void rtype::GameEngine::_savePosition(const std::string &info)
     }
 }
 
-void rtype::GameEngine::updateMainPosition(const sf::Vector2f & pos)
-{
-    if (!players.empty()) {
-        players.front().posX = pos.x;
-        players.front().posY = pos.y;
-    }
-}
-
-void rtype::GameEngine::updateCharactersPosition(std::map<Player, Character> characters)
+void rtype::GameEngine::updateMainCharacterPosition(std::map<Player, Character> characters)
 {
     if (!players.empty()) {
         for (auto &player : players) {
-            std::for_each(characters.begin(), characters.end(),
-                          [&player](const std::pair<Player, Character> &character) {
-                              if (player == character.first) {
-                                  player.posX = character.second.getPosition().x;
-                                  player.posY = character.second.getPosition().y;
-                              }
-                          });
+            if (player.ID == this->mainPlayerID) {
+                std::for_each(characters.begin(), characters.end(),
+                              [&player](const std::pair<Player, Character> &character) {
+                                  if (player == character.first) {
+                                      player.posX = character.second.getPosition().x;
+                                      player.posY = character.second.getPosition().y;
+                                  }
+                              });
+                break;
+            }
         }
     }
 }

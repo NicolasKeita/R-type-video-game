@@ -24,9 +24,9 @@ class Character {
         [[nodiscard]] sf::Vector2f getPosition() const;
         [[nodiscard]] sf::Vector2f getSize() const;
 
+        void setPosition(const sf::Vector2f &pos);
         void setDistancePerMove(float distancePerMove);
         void setBoundariesMvt(const sf::FloatRect &rect);
-        void setPosition(const sf::Vector2f &pos);
         void setScale(float scale);
 
         enum Direction { RIGHT, LEFT, UP, BOTTOM };

@@ -22,12 +22,13 @@ namespace rtype {
             GameEngine();
 
             void saveAllPositions(const std::string &positionsProtocol);
-            void updateMainPosition(const sf::Vector2f &pos);
-            void updateCharactersPosition(std::map<Player, Character> characters);
+            void updateMainCharacterPosition(std::map<Player, Character> characters);
 
         public:
             Scene               scene;
             std::list<Player>   players;
+            int                 mainPlayerID;
+
         private:
             void _savePosition(const std::string &info);
     };

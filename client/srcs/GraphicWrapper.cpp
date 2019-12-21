@@ -36,14 +36,6 @@ void rtype::GraphicWrapper::loadAssets()
 {
     this->setBackground("assets/background/space.jpg",
                         "assets/background/deathstar.png");
-    /*
-    characters.push_back(Character({"assets/character.png",
-                                    {40, 195, 100, 100},
-                                    127,
-                                    4,
-                                    CharacterGraphic::Direction::RIGHT},
-                                   {400, 400}));
-                                   */
 }
 
 void rtype::GraphicWrapper::draw()
@@ -65,6 +57,22 @@ void rtype::GraphicWrapper::addRemoveCharacter(const std::list<Player> &players)
                                                                               4,
                                                                               CharacterGraphic::Direction::RIGHT},
                                                                              {400, 400})));
+        }
+    }
+}
+
+void rtype::GraphicWrapper::moveCharacters(const std::list<Player> &players, int mainPlayerID)
+{
+    for (auto &player : players) {
+        if (player.ID != mainPlayerID) {
+            for (auto &character : characters) {
+                if (character.first == player) {
+                    sf::Vector2f pos;
+                    pos.x = player.posX;
+                    pos.y = player.posY;
+                    character.second.setPosition(pos);
+                }
+            }
         }
     }
 }

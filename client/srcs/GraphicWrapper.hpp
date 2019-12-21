@@ -28,6 +28,7 @@ namespace rtype {
             void loadAssets();
             void draw() override;
             void addRemoveCharacter(const std::list<Player> &players);
+            void moveCharacters(const std::list<Player> &players, int mainPlayerID);
 
         private:
             void _drawBackground() override;
@@ -37,7 +38,6 @@ namespace rtype {
             Cinematic           cinematic;
             PlayerBoard         playerBoard;
             bool                active;
-            //std::list<Character>    characters;
             std::map<Player, Character>   characters;
         private:
             Background       _background;

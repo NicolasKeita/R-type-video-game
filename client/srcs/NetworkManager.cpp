@@ -45,10 +45,16 @@ std::string NetworkManager::protocolDecideWhichMessageToSend(const rtype::GameEn
     if (gameEngine.players.empty())
         msg = "IDREQUEST";
     else {
-        msg = "POS " +
-              std::to_string(gameEngine.players.front().ID) +
-              "  " + std::to_string(gameEngine.players.front().posY) +
-              "  " + std::to_string(gameEngine.players.front().posX);
+        std::unique_ptr<rtype::Player> playerPointer;
+        for (auto &player : gameEngine.players) {
+            if (player.ID == gameEngine.mainPlayerID) {
+                playerPointer = std::make_unique<rtype::Player>(player);
+                break;
+            }
+        }
+        msg = "POS " + std::to_string(playerPointer->ID) +
+                "  " + std::to_string(playerPointer->posY) +
+                "  " + std::to_string(playerPointer->posX);
     }
     return msg;
 }
@@ -58,12 +64,13 @@ int NetworkManager::protocolHandleReceivedMessages(const std::string &reply, rty
     if (boost::starts_with(reply, "ID")) {
         int idValue = std::stoi(reply.substr(2));
         gameEngine.players.push_front(rtype::Player(idValue));
+        gameEngine.mainPlayerID = idValue;
     }
-    if (boost::starts_with(reply, "POS")) {
+    else if (boost::starts_with(reply, "POS")) {
         std::cerr << "MessageReceivedDEBUT" << reply << "FIN" << std::endl;
         gameEngine.saveAllPositions(reply);
     }
-    if (boost::starts_with(reply, "TERMINATE")) {
+    else if (boost::starts_with(reply, "TERMINATE")) {
         gameEngine.scene = rtype::GameEngine::END;
         return 1;
     }

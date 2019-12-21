@@ -58,7 +58,12 @@ int main(int argc, char **argv, char **env)
                     graphic.window.close();
                     break;
                 }
-                graphic.characters.begin()->second.activateKeyboardMvt(event);
+                for (auto &character : graphic.characters) {
+                    if (character.first.ID == gameEngine.mainPlayerID) {
+                        character.second.activateKeyboardMvt(event);
+                        break;
+                    }
+                }
             }
             graphic.window.clear();
 
@@ -71,11 +76,12 @@ int main(int argc, char **argv, char **env)
                     break;
                 }
                 case GameEngine::WORLD : {
-                    //gameEngine.updateMainPosition(graphic.characters.front().getPosition());
-                    gameEngine.updateCharactersPosition(graphic.characters);
+                    gameEngine.updateMainCharacterPosition(graphic.characters);
                     graphic.playerBoard.setText(gameEngine.players);
                     graphic.addRemoveCharacter(gameEngine.players);
+                    graphic.moveCharacters(gameEngine.players, gameEngine.mainPlayerID);
                     graphic.draw();
+                    break;
                 }
                 default:
                     break;
