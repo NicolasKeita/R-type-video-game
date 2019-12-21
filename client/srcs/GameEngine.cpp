@@ -9,6 +9,7 @@
 #include <unordered_map>
 #include "GameEngine.hpp"
 #include "MyStrTok.hpp"
+#include "GraphicWrapper.hpp"
 
 rtype::GameEngine::GameEngine() : scene { WORLD }, mainPlayerID { -2 }
 {}
