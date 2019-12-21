@@ -14,6 +14,7 @@ namespace rtype {
             explicit Player(int id = -1) : ID { id }, posX { -1 }, posY { -1 }, score { - 1 } {};
 
             bool operator<(const Player &other) const { return ID < other.ID; };
+            bool operator==(const Player &other) const { return ID == other.ID; };
 
             int ID;
             float posX;

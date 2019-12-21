@@ -55,3 +55,18 @@ void rtype::GameEngine::updateMainPosition(const sf::Vector2f & pos)
         players.front().posY = pos.y;
     }
 }
+
+void rtype::GameEngine::updateCharactersPosition(std::map<Player, Character> characters)
+{
+    if (!players.empty()) {
+        for (auto &player : players) {
+            std::for_each(characters.begin(), characters.end(),
+                          [&player](const std::pair<Player, Character> &character) {
+                              if (player == character.first) {
+                                  player.posX = character.second.getPosition().x;
+                                  player.posY = character.second.getPosition().y;
+                              }
+                          });
+        }
+    }
+}

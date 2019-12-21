@@ -13,6 +13,7 @@
 #include <SFML/Graphics.hpp>
 #include "Player.hpp"
 #include "Cinematic.hpp"
+#include "Character.hpp"
 
 namespace rtype {
     class GameEngine {
@@ -22,6 +23,7 @@ namespace rtype {
 
             void saveAllPositions(const std::string &positionsProtocol);
             void updateMainPosition(const sf::Vector2f &pos);
+            void updateCharactersPosition(std::map<Player, Character> characters);
 
         public:
             Scene               scene;

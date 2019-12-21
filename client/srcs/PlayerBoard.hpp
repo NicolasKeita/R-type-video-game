@@ -21,9 +21,9 @@ namespace rtype {
             void drawOnWindow(sf::RenderWindow &window);
 
             std::map<Player, sf::Text>  mapTextAreas;
-            sf::Text    textNoServerDetected;
-            bool        firstDataReceived;
-            sf::Font    font;
+            sf::Text                    textNoServerDetected;
+            bool                        firstDataReceived;
+            sf::Font                    font;
 
         private:
             void _setTextOneArea(sf::Text &textGraphic,

@@ -46,7 +46,7 @@ class Character {
         float            _distancePerMove;
         std::array<std::vector<sf::Sprite>, 4> _sprites;
 
-        const float SPEED_FRAME = 4.f;
+        static constexpr float SPEED_FRAME = 4.f;
 };
 
 

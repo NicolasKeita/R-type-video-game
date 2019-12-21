@@ -10,6 +10,7 @@
 
 #include <iostream>
 #include <list>
+#include <unordered_map>
 #include <SFML/Graphics.hpp>
 #include "IGraphicWrapper.hpp"
 #include "Background.hpp"
@@ -23,16 +24,21 @@ namespace rtype {
         public:
             GraphicWrapper();
             void createWindows(size_t width, size_t height) override;
-            void drawBackground() override;
             void setBackground(const std::string &image1, const std::string &image2) override;
             void loadAssets();
+            void draw() override;
+            void addRemoveCharacter(const std::list<Player> &players);
 
-        public:
-            sf::RenderWindow        window;
-            Cinematic               cinematic;
-            PlayerBoard             playerBoard;
-            bool                    active;
-            std::list<Character>    characters;
+        private:
+            void _drawBackground() override;
+
+    public:
+            sf::RenderWindow    window;
+            Cinematic           cinematic;
+            PlayerBoard         playerBoard;
+            bool                active;
+            //std::list<Character>    characters;
+            std::map<Player, Character>   characters;
         private:
             Background       _background;
     };

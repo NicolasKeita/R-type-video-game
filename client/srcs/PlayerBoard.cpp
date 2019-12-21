@@ -62,7 +62,7 @@ void rtype::PlayerBoard::_setTextOneArea(sf::Text &textGraphic,
     auto createTextGraphic = [&]()
     {
         std::string text = createText();
-        sf::Text textArea;
+        sf::Text    textArea;
         textArea.setFont(font);
         textArea.setString(text);
         textArea.setPosition(1500, static_cast<float>(posYOnScreen));

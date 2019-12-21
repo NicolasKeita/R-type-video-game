@@ -58,7 +58,7 @@ int main(int argc, char **argv, char **env)
                     break;
                 }
                 for (auto &character : graphic.characters)
-                    character.activateKeyboardMvt(event);
+                    character.second.activateKeyboardMvt(event);
             }
             graphic.window.clear();
 
@@ -71,13 +71,11 @@ int main(int argc, char **argv, char **env)
                     break;
                 }
                 case GameEngine::WORLD : {
-                    graphic.drawBackground();
-                    gameEngine.updateMainPosition(graphic.characters.front().getPosition());
+                    //gameEngine.updateMainPosition(graphic.characters.front().getPosition());
+                    gameEngine.updateCharactersPosition(graphic.characters);
                     graphic.playerBoard.setText(gameEngine.players);
-                    graphic.playerBoard.drawOnWindow(graphic.window);
-                    for (auto &character : graphic.characters)
-                        character.drawOnWindow(graphic.window);
-                    break;
+                    graphic.addRemoveCharacter(gameEngine.players);
+                    graphic.draw();
                 }
                 default:
                     break;

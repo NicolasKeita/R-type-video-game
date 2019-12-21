@@ -6,6 +6,8 @@
 */
 
 #include <iostream>
+#include <utility>
+#include <list>
 #include "GraphicWrapper.hpp"
 
 rtype::GraphicWrapper::GraphicWrapper()
@@ -19,7 +21,7 @@ void rtype::GraphicWrapper::createWindows(size_t width, size_t height)
     active = true;
 }
 
-void rtype::GraphicWrapper::drawBackground()
+void rtype::GraphicWrapper::_drawBackground()
 {
     _background.drawAndMoveBackground();
 }
@@ -34,10 +36,35 @@ void rtype::GraphicWrapper::loadAssets()
 {
     this->setBackground("assets/background/space.jpg",
                         "assets/background/deathstar.png");
+    /*
     characters.push_back(Character({"assets/character.png",
                                     {40, 195, 100, 100},
                                     127,
                                     4,
                                     CharacterGraphic::Direction::RIGHT},
                                    {400, 400}));
+                                   */
+}
+
+void rtype::GraphicWrapper::draw()
+{
+    this->_drawBackground();
+    this->playerBoard.drawOnWindow(window);
+    this->playerBoard.drawOnWindow(window);
+    for (auto &character : this->characters)
+        character.second.drawOnWindow(window);
+}
+
+void rtype::GraphicWrapper::addRemoveCharacter(const std::list<Player> &players)
+{
+    for (auto &player : players) {
+        if (characters.find(player) == characters.end()) {
+            characters.insert(std::pair<Player, Character>(player, Character({"assets/character.png",
+                                                                              {40, 195, 100, 100},
+                                                                              127,
+                                                                              4,
+                                                                              CharacterGraphic::Direction::RIGHT},
+                                                                             {400, 400})));
+        }
+    }
 }
