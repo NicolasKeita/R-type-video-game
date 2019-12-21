@@ -11,6 +11,7 @@
 #include <list>
 #include <string>
 #include <SFML/Graphics.hpp>
+#include <unordered_map>
 #include "Player.hpp"
 #include "Cinematic.hpp"
 #include "Character.hpp"
