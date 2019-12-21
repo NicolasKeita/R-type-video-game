@@ -9,6 +9,7 @@
 #define MY_SFML_CINEMATIC_NETWORKMANAGER_HPP
 
 #include <string>
+#include <mutex>
 #include <SFML/System/Clock.hpp>
 #include "GameEngine.hpp"
 #include "ClientUdpMultiThreadWrapper.hpp"
@@ -25,7 +26,8 @@ class NetworkManager {
 
     private:
         uti::network::ClientUdpMultiThreadWrapper   _udp;
-        sf::Clock                                   _clock; // TODO : remove dependancy to SFML
+        sf::Clock                                   _clock;
+        std::mutex                                  _mutex;
 };
 
 

@@ -17,9 +17,12 @@ NetworkManager::NetworkManager(const std::string &addressServer,
 void NetworkManager::handleProtocol(rtype::GameEngine &gameEngine)
 {
     while (true) {
-        // send a message every 1000 milliseconds
-        if (_clock.getElapsedTime().asMilliseconds() > 100) {
+        // Send a message every 70 milliseconds
+        if (_clock.getElapsedTime().asMilliseconds() > 70) {
+            _mutex.lock();
             const std::string msg = protocolDecideWhichMessageToSend(gameEngine);
+            _mutex.unlock();
+
             std::string reply;
             try {
                 _udp.sendMessage(msg);
@@ -30,7 +33,10 @@ void NetworkManager::handleProtocol(rtype::GameEngine &gameEngine)
             } catch (const boost::system::system_error &e) { // correct shutdown of the network
                 return;
             }
+
+            _mutex.lock();
             int stopProgram = protocolHandleReceivedMessages(reply, gameEngine);
+            _mutex.unlock();
             if (stopProgram)
                 return;
         }
