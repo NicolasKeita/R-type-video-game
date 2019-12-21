@@ -22,7 +22,7 @@ namespace rtype {
             GameEngine();
 
             void saveAllPositions(const std::string &positionsProtocol);
-            void updateMainCharacterPosition(std::map<Player, Character> characters);
+            void updateMainCharacterPosition(const std::unordered_map<Player, Character> &characters);
 
         public:
             Scene               scene;
