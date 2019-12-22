@@ -8,7 +8,6 @@
 #include <thread>
 #include "GraphicWrapper.hpp"
 #include "Character.hpp"
-#include "Player.hpp"
 #include "NetworkManager.hpp"
 #include "GameEngine.hpp"
 #include "MyProgArgs.hpp"

@@ -22,7 +22,7 @@ Linux :
 
 1) ``` $ bash build.bash``` (to compile)
 
- 2) ```$ ./r-type_server``` (to start the server)
+ 2) ```$ ./r-type_server 42424``` (to start the server)
  
  3) ```$ ./r-type_client 0.0.0.0 42424``` (to start the game)
  

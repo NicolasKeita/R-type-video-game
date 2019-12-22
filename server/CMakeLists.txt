@@ -6,7 +6,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 add_executable(r-type_server
         srcs/main.cpp
-        srcs/GameInfo.cpp)
+        srcs/GameInfo.cpp
+        srcs/ProtocolHandler.cpp)
 
 target_include_directories(r-type_server PUBLIC
         ./srcs/

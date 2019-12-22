@@ -11,7 +11,7 @@
 #include "MyStrTok.hpp"
 #include "GraphicWrapper.hpp"
 
-rtype::GameEngine::GameEngine() : scene { WORLD }, mainPlayerID { -2 }
+rtype::GameEngine::GameEngine() : scene { INTRO }, mainPlayerID { -2 }
 {}
 
 void rtype::GameEngine::saveAllPositions(const std::string & positionsProtocol)
