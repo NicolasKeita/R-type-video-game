@@ -10,15 +10,13 @@ We created the game with the SFML library.
 
 ## Usage
 
-You will find executables for linux at the root and for windows in the windows_10_executables folder :
-Linux :
+You will find executables in the bin folder. Run the server then the client (let the server open).
 
- 1) ```$ ./r-type_server 42424``` (to start the server)
+You can config the network by adding parameters, e.g :
+ 1) ```$ ./r-type_server 42424```
  
- 2) ```$ ./r-type_client 0.0.0.0 42424``` (to start the game)
+ 2) ```$ ./r-type_client 0.0.0.0 42424```
  
- (You can run the server and the game on different machines. If you do so, change 0.0.0.0 to the IP address of your server machine)
-
 ## Compilation
 
 Want to compile yourself from source code ?
