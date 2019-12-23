@@ -13,11 +13,6 @@ add_executable(r-type_client
 		srcs/NetworkManager.cpp
         )
 
-if (MSVC)
-	set(SFML_LIB_DIR "${CMAKE_CURRENT_SOURCE_DIR}/lib/SFML-2.5.1/windows/")
-else(MSCV)
-	set(SFML_LIB_DIR "${CMAKE_CURRENT_SOURCE_DIR}/lib/SFML-2.5.1/linux/")
-endif(MSVC)
 
 target_include_directories(r-type_client PUBLIC
 		./srcs/
@@ -25,18 +20,14 @@ target_include_directories(r-type_client PUBLIC
 		../lib/uti/my_string/
 		../lib/uti/my_prog_args/
 		lib/my_sfml_character/
-		lib/my_sfml_cinematic/
-		${SFML_LIB_DIR}/include/)
+		lib/my_sfml_cinematic/)
 
-add_subdirectory("lib/my_sfml_character/")
-add_subdirectory("lib/my_sfml_cinematic/")
+add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/lib/my_sfml_character/")
+add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/lib/my_sfml_cinematic/")
 
 target_link_directories(r-type_client PUBLIC
-		${SFML_LIB_DIR}/lib/
+		${CONAN_LIB_DIRS}
 		../lib/uti/my_network)
-
-set(SFML_DIR "${SFML_LIB_DIR}/lib/cmake/SFML")
-find_package(SFML 2.5.1 COMPONENTS graphics audio REQUIRED)
 
 target_link_libraries(r-type_client PRIVATE
 		my_network
