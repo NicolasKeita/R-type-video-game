@@ -11,4 +11,4 @@ cd ../
 
 
 #windows 10
-conan install ../ --build=missing -s compiler="Visual Studio" -s compiler.version=16 -s compiler.cppstd=17 -s build_type=Debug -g virtualenv
+conan install ../ --build=missing -s compiler="Visual Studio" -s compiler.version=16 -s compiler.cppstd=14 -s build_type=Debug -g virtualenv
