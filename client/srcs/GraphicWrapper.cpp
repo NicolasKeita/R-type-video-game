@@ -51,7 +51,7 @@ void rtype::GraphicWrapper::addRemoveCharacter(const std::list<Player> &players)
 {
     for (auto &player : players) {
         if (characters.find(player) == characters.end()) {
-            characters.insert(std::pair<Player, Character>(player, Character({"assets/character.png",
+            characters.insert(std::pair<Player, Character>(player, Character({"assets/character/character.png",
                                                                               {40, 195, 100, 100},
                                                                               127,
                                                                               4,

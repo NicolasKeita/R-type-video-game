@@ -26,8 +26,8 @@ class Cinematic {
 
         sf::Clock clock;
         sf::Music music;
-        const std::string GAMECUBE_SOUND = "client/lib/my_sfml_cinematic/assets/gamecube_intro.ogg";
-        const std::string CINEMATIC_SPRITES = "client/lib/my_sfml_cinematic/assets/f.png";
+        const std::string GAMECUBE_SOUND = "assets/cinematic/gamecube_intro.ogg";
+        const std::string CINEMATIC_SPRITES = "assets/cinematic/f.png";
 };
 
 

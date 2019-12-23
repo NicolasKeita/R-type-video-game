@@ -13,7 +13,7 @@
 rtype::PlayerBoard::PlayerBoard()
         :   firstDataReceived { false }
 {
-    font.loadFromFile("assets/arial.ttf");
+    font.loadFromFile("assets/font/arial.ttf");
     _setTextOneArea(textNoServerDetected, "No server detected", -1, -1, 0);
 }
 

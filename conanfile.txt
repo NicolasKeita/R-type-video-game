@@ -1,6 +1,6 @@
 [requires]
 boost/1.69.0@conan/stable
-#sfml/2.5.1@bincrafters/stable
+sfml/2.5.1@bincrafters/stable
 
 [build_requires]
 openal/1.19.0@bincrafters/stable
@@ -17,14 +17,16 @@ openal/1.19.0@bincrafters/stable
 
 [options]
 #boost:shared=True
-#sfml:shared=True
-#sfml:fPIC=False
-#sfml:window=True
-#sfml:graphics=True
-#sfml:network=True
-#sfml:audio=True
+sfml:shared=True
+sfml:window=True
+sfml:graphics=True
+sfml:network=True
+sfml:audio=True
 
 [generators]
 cmake
 visual_studio
 
+[imports]
+bin, *.dll -> ./bin # Copies all dll files from packages bin folder to my "bin" folder
+lib, *.so -> ./bin
