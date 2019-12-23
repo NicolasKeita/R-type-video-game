@@ -12,13 +12,17 @@
 
 int main(int argc, char **argv, char **env)
 {
-    uti::MyProgArgs         args(argc, argv, env, 1);
+    uti::MyProgArgs         args(argc, argv, env, 0);
 
     try
     {
+        int port;
+        if (args.getSize() > 0)
+            port = std::stoi(args.getArgs().at(1));
+        else
+            port = 42424;
         uti::network::ServerUdpMultiThreadWrapper network;
-        network.turnOn(std::stoi(args.getArgs().at(1)),
-                       &rtype::ProtocolHandler::handleMessageReceived);
+        network.turnOn(port, &rtype::ProtocolHandler::handleMessageReceived);
     }
     catch (std::exception& e)
     {

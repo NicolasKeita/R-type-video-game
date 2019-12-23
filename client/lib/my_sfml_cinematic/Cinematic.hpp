@@ -11,6 +11,7 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 #include <string>
+#include <array>
 
 class Cinematic {
     public:

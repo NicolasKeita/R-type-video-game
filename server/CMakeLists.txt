@@ -19,7 +19,9 @@ target_link_libraries(r-type_server PRIVATE
         my_network
         ${CONAN_LIBS})
 
-target_compile_options(r-type_server PRIVATE -Wall -Wextra)
+if(CMAKE_COMPILER_IS_GNUCXX)
+    target_compile_options(r-type_server PRIVATE -Wall -Wextra)
+endif(CMAKE_COMPILER_IS_GNUCXX)
 
 add_custom_command(TARGET r-type_server
                    POST_BUILD

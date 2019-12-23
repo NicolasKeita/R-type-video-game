@@ -26,4 +26,6 @@ target_link_libraries(my_sfml_character PRIVATE
         sfml-window
         sfml-system)
 
-target_compile_options(my_sfml_character PRIVATE -Wall -Wextra)
+if(CMAKE_COMPILER_IS_GNUCXX)
+    target_compile_options(my_sfml_character PRIVATE -Wall -Wextra)
+endif(CMAKE_COMPILER_IS_GNUCXX)

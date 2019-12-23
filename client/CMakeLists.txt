@@ -44,7 +44,9 @@ target_link_libraries(r-type_client PRIVATE
 		my_sfml_cinematic
 		${CONAN_LIBS})
 
-target_compile_options(r-type_client PRIVATE -Wall -Wextra -g3)
+if(CMAKE_COMPILER_IS_GNUCXX)
+	target_compile_options(r-type_client PRIVATE -Wall -Wextra)
+endif(CMAKE_COMPILER_IS_GNUCXX)
 
 add_custom_command(TARGET r-type_client
 		POST_BUILD

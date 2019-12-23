@@ -6,7 +6,6 @@
 */
 
 #include <boost/asio.hpp>
-#include <pthread.h>
 #include <thread>
 #include "ServerUdpMultiThreadWrapper.hpp"
 

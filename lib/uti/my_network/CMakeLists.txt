@@ -29,7 +29,9 @@ target_include_directories(my_network PUBLIC
         ./../my_string/)
 
 target_link_libraries(my_network ${CMAKE_THREAD_LIBS_INIT})
-target_compile_options(my_network PRIVATE -Wall -Wextra)
+if(CMAKE_COMPILER_IS_GNUCXX)
+    target_compile_options(my_network PRIVATE -Wall -Wextra)
+endif(CMAKE_COMPILER_IS_GNUCXX)
 
 enable_testing()
 add_subdirectory(tests/)

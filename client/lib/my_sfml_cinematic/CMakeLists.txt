@@ -27,4 +27,6 @@ target_link_libraries(my_sfml_cinematic PRIVATE
         sfml-system
         sfml-audio)
 
-target_compile_options(my_sfml_cinematic PRIVATE -Wall -Wextra)
+if(CMAKE_COMPILER_IS_GNUCXX)
+    target_compile_options(my_sfml_cinematic PRIVATE -Wall -Wextra)
+endif(CMAKE_COMPILER_IS_GNUCXX)

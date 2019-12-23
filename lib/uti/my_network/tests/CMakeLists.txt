@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.12.4)
 project(my_network_library_tests)
 
+if(NOT CMAKE_COMPILER_IS_GNUCXX)
+    return()
+endif(NOT CMAKE_COMPILER_IS_GNUCXX)
+
 find_package(Boost 1.69.0 REQUIRED)
 find_package(Threads)
 find_program(BASH_PROGRAM bash)
