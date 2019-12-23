@@ -17,7 +17,7 @@ int main(int argc, char **argv, char **env)
     try
     {
         int port;
-        if (args.getSize() > 0)
+        if (args.getSize() > 1)
             port = std::stoi(args.getArgs().at(1));
         else
             port = 42424;

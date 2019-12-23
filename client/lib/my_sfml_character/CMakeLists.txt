@@ -19,12 +19,13 @@ target_include_directories(my_sfml_character PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}
         ${SFML_LIB_DIR}/include/)
 
-target_link_directories(my_sfml_character PRIVATE
-        ${SFML_LIB_DIR}/lib)
-target_link_libraries(my_sfml_character PRIVATE
-        sfml-graphics
-        sfml-window
-        sfml-system)
+
+#target_link_directories(my_sfml_character PRIVATE
+#        ${SFML_LIB_DIR}/lib)
+#target_link_libraries(my_sfml_character PRIVATE
+#        sfml-graphics
+#        sfml-window
+#        sfml-system)
 
 if(CMAKE_COMPILER_IS_GNUCXX)
     target_compile_options(my_sfml_character PRIVATE -Wall -Wextra)

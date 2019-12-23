@@ -6,6 +6,7 @@
 */
 
 #include <thread>
+#include <string>
 #include "GraphicWrapper.hpp"
 #include "Character.hpp"
 #include "NetworkManager.hpp"
@@ -14,24 +15,27 @@
 
 NetworkManager createNetwork(const uti::MyProgArgs &args)
 {
-    int port = 0;
+    int         port = 42424;
+    std::string serverAddress = "0.0.0.0";
 
-    try {
-        port = std::stoi(args.getArgs().at(2));
-        if (port < 2000) {
-            throw std::invalid_argument("Pick higher PORT");
+    if (args.getSize() > 1) {
+        try {
+            port = std::stoi(args.getArgs().at(2));
+            if (port < 2000)
+                throw std::invalid_argument("Pick higher PORT");
+            serverAddress = args.getArgs().at(1);
+        }
+        catch (std::invalid_argument & e) {
+            std::cerr << "Wrong port\n" << e.what() << std::endl;
+            exit(84);
         }
     }
-    catch (std::invalid_argument &e) {
-        std::cerr << "Wrong port\n" << e.what() << std::endl;
-        exit(84);
-    }
-    return NetworkManager(args.getArgs().at(1), port);
+    return NetworkManager(serverAddress, port);
 }
 
 int main(int argc, char **argv, char **env)
 {
-    uti::MyProgArgs         args(argc, argv, env, 2);
+    uti::MyProgArgs         args(argc, argv, env, 0);
 
     rtype::GameEngine       gameEngine;
     rtype::GraphicWrapper   graphic;

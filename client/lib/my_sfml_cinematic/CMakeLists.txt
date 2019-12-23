@@ -19,13 +19,13 @@ target_include_directories(my_sfml_cinematic PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}
         ${SFML_LIB_DIR}/include/)
 
-target_link_directories(my_sfml_cinematic PRIVATE
-        ${SFML_LIB_DIR}/lib)
-target_link_libraries(my_sfml_cinematic PRIVATE
-        sfml-graphics
-        sfml-window
-        sfml-system
-        sfml-audio)
+#target_link_directories(my_sfml_cinematic PRIVATE
+#        ${SFML_LIB_DIR}/lib)
+#target_link_libraries(my_sfml_cinematic PRIVATE
+#        sfml-graphics
+#        sfml-window
+#        sfml-system
+#        sfml-audio)
 
 if(CMAKE_COMPILER_IS_GNUCXX)
     target_compile_options(my_sfml_cinematic PRIVATE -Wall -Wextra)
