@@ -21,7 +21,8 @@ You can config the network by adding parameters, e.g :
 
 Want to compile yourself from source code ?
 
-Linux :
+
+## Linux compilation :
 
 #### Install prerequisites :
 
@@ -40,7 +41,7 @@ Here is how to quickly install them on Fedora and Ubuntu :
 #### Then compile executables with my script
 ``` $ ./build_executables_linux.sh```
 
-Windows :
+## Windows compilation :
 
 Prerequisites :
 Visual Studio (with the C++ addons)
