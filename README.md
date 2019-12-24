@@ -26,7 +26,7 @@ Conan (to install Boost.asio) : https://conan.io
 
 Cmake version 3.12.4 minimun
 
-SFML dependancies : https://www.sfml-dev.org/tutorials/2.5/compile-with-cmake-fr.php
+SFML dependancies : https://www.sfml-dev.org/tutorials/2.5/compile-with-cmake.php
 
 Here is how to quickly install them on Fedora and Ubuntu :
 
