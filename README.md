@@ -26,7 +26,7 @@ You can configurate the network by adding parameters, e.g :
 
 ## Linux compilation :
 
-#### Install prerequisites :
+#### Prerequisites to install :
 
 Conan (to install Boost.asio) : https://conan.io
 
@@ -45,7 +45,9 @@ Here is how to quickly install them on Fedora and Ubuntu :
 
 ## Windows compilation :
 
-Prerequisites :
-Visual Studio (with the C++ addons)
-1) ?
-2) ?
+#### Prerequisites to install :
+ - Visual Studio with their C++ addon (this step is just to download visual studio compiler)
+
+#### Then compile executables with my script
+- Run the script ```$ build_executables_windows_10.ps1```
+You have to run this script in a powershell (WINDOWS_KEY + X). To run a powershell script, you have to authorize scripts : ```$ Set-ExecutionPolicy RemoteSigned``` (and ```$ Set-ExecutionPolicy Restricted``` to undo)
