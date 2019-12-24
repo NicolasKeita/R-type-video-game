@@ -50,4 +50,5 @@ Here is how to quickly install them on Fedora and Ubuntu :
 
 #### Then compile executables with my script
 - Run the script ```$ build_executables_windows_10.ps1```
-You have to run this script in a powershell (WINDOWS_KEY + X). To run a powershell script, you have to authorize scripts : ```$ Set-ExecutionPolicy RemoteSigned``` (and ```$ Set-ExecutionPolicy Restricted``` to undo)
+
+You have to run this script in a powershell (WINDOWS_KEY + X). To run a powershell script, you have to authorize scripts with the following command : ```$ Set-ExecutionPolicy RemoteSigned``` (```$ Set-ExecutionPolicy Restricted``` to undo)
