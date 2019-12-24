@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-rm -vrf \
+rm -v -rf \
 r-type_client \
 r-type_client.cbp \
 CMakeCache.txt \

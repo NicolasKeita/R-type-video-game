@@ -9,7 +9,7 @@ cmake -DCMAKE_BUILD_TYPE=Release ../
 cmake --build ./ -j "$(nproc --all)"
 cp -rf ../bin/Linux/assets ./bin
 echo -e "\n\nExecutables are located in build/bin/\n"
-echo "If shared libraries are not found, use the script: activate.sh in build/  Usage : $ source activate.sh"
+echo "If shared libraries are not automatically found, use the script: activate.sh in build/  Usage : $ source activate.sh"
 
 #windows 10
 #conan install ../ --build=missing -s compiler="Visual Studio" -s compiler.version=16 -s compiler.cppstd=14 -s build_type=Release -g virtualenv
