@@ -4,9 +4,15 @@
 # R-Type
 R-Type is a "shoot them up" 2D video game.
 
-We added multiplayer to the game.
+I tried to reproduce the original game and add multiplayer to the game.
 
-We created the game with the SFML library.
+My R-Type game has been created using the SFML library.
+
+This repo has not been created to show a beautiful game but to exhibit my skills about :
+- Network programming
+- understand the difference between UNIX and Windows
+- UML class diagram
+- understand, use, and design an API
 
 ## Usage
 
