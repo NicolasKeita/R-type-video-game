@@ -23,13 +23,22 @@ Want to compile yourself from source code ?
 
 Linux :
 
-Prerequisites :
+1) Install prerequisites :
+
 Conan (to install Boost.asio) : https://conan.io
 
 Cmake version 3.12.4 minimun
 
-Package : openal, g++, libtool (linux only. Fedora : ```# dnf install openal g++ libtool``` ; Ubuntu : ```# apt-get install -y libopenal-dev libalut-dev && apt-get -y build-dep libsfml```)
-1) ``` $ bash build.bash```
+SFML dependancies : https://www.sfml-dev.org/tutorials/2.5/compile-with-cmake-fr.php
+
+Here is how to quickly install them on Fedora and Ubuntu :
+
+On Fedora : ```$ ./script/install_requirements_to_build_SFML_on_fedora.sh```
+
+On Ubuntu : ```# apt-get install -y libopenal-dev libalut-dev && apt-get -y build-dep libsfml```
+
+2) Then compile executables with my script
+``` $ ./build_executables_linux.sh```
 
 Windows :
 
