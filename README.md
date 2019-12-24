@@ -30,7 +30,7 @@ SFML dependancies : https://www.sfml-dev.org/tutorials/2.5/compile-with-cmake.ph
 
 Here is how to quickly install them on Fedora and Ubuntu :
 
-- On Fedora : ```$ ./script/install_requirements_to_build_SFML_on_fedora.sh```
+- On Fedora : ```# ./script/install_requirements_to_build_SFML_on_fedora.sh```
 
 - On Ubuntu : ```# apt-get install -y libopenal-dev libalut-dev && apt-get -y build-dep libsfml```
 
