@@ -7,7 +7,6 @@ sfml/2.5.1@bincrafters/stable
 [options]
 #boost:shared=True
 sfml:shared=True
-sfml:fPIC=True
 sfml:window=True
 sfml:graphics=True
 sfml:network=False

@@ -4,4 +4,7 @@ conan install ../ --build=missing -s compiler="Visual Studio" -s compiler.versio
 cmake -DCMAKE_BUILD_TYPE=Release ../
 cmake --build ./
 cp -r ../bin/Linux/assets ./bin
-echo -e "\n\nExecutables are located in build/bin/\n"
+echo ""
+echo "Compilation successfully completed !"
+echo " ---- Executables are located in build/bin/"
+cd ../
