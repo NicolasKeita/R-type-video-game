@@ -10,9 +10,9 @@ We created the game with the SFML library.
 
 ## Usage
 
-You will find executables in the bin folder. Run the server then the client (let the server open).
+Want to play ? You will find executables in the bin folder. Run the server then the client (let the server open).
 
-You can config the network by adding parameters, e.g :
+You can configurate the network by adding parameters, e.g :
  1) ```$ ./r-type_server 42424```
  
  2) ```$ ./r-type_client 0.0.0.0 42424```
