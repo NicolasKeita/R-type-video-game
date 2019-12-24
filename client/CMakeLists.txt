@@ -31,10 +31,10 @@ target_link_directories(r-type_client PUBLIC
 
 target_link_libraries(r-type_client PRIVATE
 		my_network
-		sfml-graphics
-		sfml-window
-		sfml-system
-		sfml-audio
+		#sfml-graphics
+		#sfml-window
+		#sfml-system
+		#sfml-audio
 		my_sfml_character
 		my_sfml_cinematic
 		${CONAN_LIBS})
