@@ -17,10 +17,6 @@ You can config the network by adding parameters, e.g :
  
  2) ```$ ./r-type_client 0.0.0.0 42424```
  
-## Compilation
-
-Want to compile yourself from source code ?
-
 
 ## Linux compilation :
 
