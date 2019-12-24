@@ -37,7 +37,6 @@ SFML dependancies : https://www.sfml-dev.org/tutorials/2.5/compile-with-cmake.ph
 Here is how to quickly install them on Fedora and Ubuntu :
 
 - On Fedora : ```# ./script/install_requirements_to_build_SFML_on_fedora.sh```
-
 - On Ubuntu : ```# apt-get install -y libopenal-dev libalut-dev && apt-get -y build-dep libsfml```
 
 #### Then compile executables with my script
@@ -46,7 +45,9 @@ Here is how to quickly install them on Fedora and Ubuntu :
 ## Windows compilation :
 
 #### Prerequisites to install :
- - Visual Studio with their C++ addon (this step is just to download visual studio compiler)
+- Conan (to install Boost.asio) : https://conan.io
+- Cmake version 3.12.4 minimun
+- Visual Studio with their C++ addon (this step is just to download visual studio compiler)
 
 #### Then compile executables with my script
 - Run the script ```$ build_executables_windows_10.ps1```
