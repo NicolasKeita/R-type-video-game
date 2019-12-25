@@ -1,0 +1,18 @@
+RFC Rtype Protocol
+
+The server MUST handle the following commands :
+
+    IDREQUEST <LF>                                      : Send back a ID
+    POS <SP> <player id> <SP> <player position> <LF>    : Save player's position then broadcast to all players everyone's position
+    TERMINATE <LF>                                      : Shut down the server
+
+    <player position> is composed of : <position Y> <SP> <position X>
+
+The client MUST handle the following commands :
+
+    ID <player id> <LF> : Save player's ID
+    POS <SP> <player id> <SP> <player position> ; <LF>
+
+    Multiple positions MAY be sent at once using multiple "POS" commands seperated with ";" in one single command.
+    Example :
+        POS 1 430 500 ; POS 2 20 30 ; POS 5 600 200
