@@ -10,5 +10,5 @@ cp -rf ../bin/Linux/assets ./bin
 echo -e "\n\nExecutables are located in build/bin/\n"
 echo "If shared libraries are not automatically found, use the script: activate.sh in build/  Usage : $ source activate.sh"
 
-#windows 10
-#conan install ../ --build=missing -s compiler="Visual Studio" -s compiler.version=16 -s compiler.cppstd=14 -s build_type=Release -g virtualenv
+# If Conan is indefinitely locked, run the following command :
+# conan remove "*" -f && conan --remove locks && rm -rf ~/.conan/data/*
