@@ -12,7 +12,8 @@ find_program(BASH_PROGRAM bash)
 include_directories(
         ${BOOST_INCLUDE_DIRS}
         ./
-        ../)
+        ../BlockingMultiThread
+        ../Async)
 
 add_executable(test_serv test_1_source_code/serv.cpp)
 add_executable(test_client test_1_source_code/client.cpp)

@@ -22,7 +22,7 @@
 #include <boost/noncopyable.hpp>
 #include <boost/asio/buffer.hpp>
 #include <boost/format.hpp>
-#include "IServerTcpAsyncWrapper.hpp"
+#include "Async/IServerTcpAsyncWrapper.hpp"
 
 
 using boost::asio::ip::tcp;

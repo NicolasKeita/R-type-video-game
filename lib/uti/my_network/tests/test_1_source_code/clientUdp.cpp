@@ -6,7 +6,7 @@
 #include <iostream>
 #include <boost/asio.hpp>
 #include <string>
-#include "ClientUdpMultiThreadWrapper.hpp"
+#include "BlockingMultiThread/ClientUdpMultiThreadWrapper.hpp"
 
 using boost::asio::ip::udp;
 

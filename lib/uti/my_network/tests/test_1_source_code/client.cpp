@@ -2,7 +2,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <unistd.h>
-#include "ClientTcpAsyncWrapper.hpp"
+#include "Async/ClientTcpAsyncWrapper.hpp"
 
 std::string handleMessageReceived(const std::string &messageReceived)
 {

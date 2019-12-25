@@ -12,6 +12,7 @@ add_executable(r-type_server
 target_include_directories(r-type_server PUBLIC
         ./srcs/
         ../lib/uti/my_prog_args/
+        lib/uti/my_network/BlockingMultiThread
         lib/uti/my_network/
         lib/uti/my_string/)
 

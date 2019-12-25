@@ -12,7 +12,7 @@
 #include <mutex>
 #include <SFML/System/Clock.hpp>
 #include "GameEngine.hpp"
-#include "ClientUdpMultiThreadWrapper.hpp"
+#include "BlockingMultiThread/ClientUdpMultiThreadWrapper.hpp"
 
 class NetworkManager {
     public:

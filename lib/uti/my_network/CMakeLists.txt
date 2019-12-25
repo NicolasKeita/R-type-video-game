@@ -19,14 +19,16 @@ find_package(Threads REQUIRED)
 include_directories(${BOOST_INCLUDE_DIRS})
 
 add_library(my_network STATIC
-        ServerTcpAsyncWrapper.cpp
-        ClientTcpAsyncWrapper.cpp
-        ServerUdpMultiThreadWrapper.cpp
-        ClientUdpMultiThreadWrapper.cpp)
+        Async/ServerTcpAsyncWrapper.cpp
+        Async/ClientTcpAsyncWrapper.cpp
+        BlockingMultiThread/ServerUdpMultiThreadWrapper.cpp
+        BlockingMultiThread/ClientUdpMultiThreadWrapper.cpp)
 
 target_include_directories(my_network PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}
-        ./../my_string/)
+        ./../my_string/
+        Async
+        BlockingMultiThread)
 
 target_link_libraries(my_network ${CMAKE_THREAD_LIBS_INIT})
 

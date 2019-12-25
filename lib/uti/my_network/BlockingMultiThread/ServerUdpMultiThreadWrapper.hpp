@@ -10,7 +10,7 @@
 
 #include <boost/asio.hpp>
 #include <memory>
-#include "IServerUdpMultiThreadWrapper.hpp"
+#include "BlockingMultiThread/IServerUdpMultiThreadWrapper.hpp"
 
 namespace uti::network {
     class ServerUdpMultiThreadWrapper : public IServerUdpMultiThreadWrapper {

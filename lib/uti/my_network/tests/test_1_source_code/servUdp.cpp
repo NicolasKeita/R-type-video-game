@@ -3,7 +3,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <boost/asio.hpp>
-#include "ServerUdpMultiThreadWrapper.hpp"
+#include "BlockingMultiThread/ServerUdpMultiThreadWrapper.hpp"
 
 using boost::asio::ip::udp;
 
