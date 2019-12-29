@@ -18,7 +18,7 @@ This repo has not been created to show a beautiful game but to exhibit my skills
 
 Want to play ? You will find executables in the bin folder. Run the server then the client (let the server open).
 
-You can configurate the network by adding parameters, e.g :
+You can configure the network by adding parameters, e.g :
  1) ```$ ./r-type_server 42424```
  
  2) ```$ ./r-type_client 0.0.0.0 42424```
