@@ -18,4 +18,4 @@ visual_studio
 
 [imports]
 bin, *.dll -> ./bin # Copies all dll files from packages bin folder to my "bin" folder
-# lib/, *.so -> ./bin # doesn't work on Linux
+lib/, *.so* -> ./bin

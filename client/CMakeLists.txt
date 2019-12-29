@@ -13,7 +13,6 @@ add_executable(r-type_client
 		srcs/NetworkManager.cpp
         )
 
-
 target_include_directories(r-type_client PUBLIC
 		./srcs/
 		../lib/uti/my_network/
@@ -25,24 +24,26 @@ target_include_directories(r-type_client PUBLIC
 add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/lib/my_sfml_character/")
 add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/lib/my_sfml_cinematic/")
 
+
 target_link_directories(r-type_client PUBLIC
 		${CONAN_LIB_DIRS}
 		../lib/uti/my_network)
 
-target_link_libraries(r-type_client PRIVATE
+find_library(sfml-graphics NAMES sfml-graphics PATHS ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+find_library(sfml-window NAMES sfml-window PATHS ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+find_library(sfml-system NAMES sfml-system PATHS ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+find_library(sfml-audio NAMES sfml-audio PATHS ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+
+target_link_libraries(r-type_client PUBLIC
+		${sfml-graphics}
+		${sfml-window}
+		${sfml-system}
+		${sfml-audio}
 		my_network
-		#sfml-graphics
-		#sfml-window
-		#sfml-system
-		#sfml-audio
 		my_sfml_character
 		my_sfml_cinematic
-		${CONAN_LIBS})
+		)
 
 if(CMAKE_COMPILER_IS_GNUCXX)
 	target_compile_options(r-type_client PRIVATE -Wall -Wextra)
 endif(CMAKE_COMPILER_IS_GNUCXX)
-
-#add_custom_command(TARGET r-type_client
-#		POST_BUILD
-#		COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:r-type_client> ${CMAKE_HOME_DIRECTORY})
